@@ -25,6 +25,10 @@
                 android:text="Hello World!"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
+            <Button
+                android:text="分类查找"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
         </LinearLayout>
     </android.support.design.widget.CoordinatorLayout>
     <android.support.design.widget.NavigationView
