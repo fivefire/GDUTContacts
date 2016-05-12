@@ -3,6 +3,7 @@ package com.fivefire.app.gdutcontacts.ui.common;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 

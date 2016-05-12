@@ -23,7 +23,12 @@
     </style>
 
     <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
-        <item name="android:textSize">21sp</item>
+        <item name="android:textSize">@dimen/font_larger</item>
+    </style>
+
+    <style name="TitleText" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/font_normal</item>
     </style>
 
 </resources>

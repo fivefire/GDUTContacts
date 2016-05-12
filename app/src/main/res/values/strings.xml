@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">广工通信录</string>
+    <string name="change_password">修改密码</string>
+    <string name="verify">用户审核</string>
+    <string name="about_us">关于我们</string>
+    <string name="exit">退出</string>
 </resources>
