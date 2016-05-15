@@ -1,7 +1,23 @@
 <resources>
+    <string name="Search">搜索</string>
     <string name="app_name">广工通信录</string>
     <string name="change_password">修改密码</string>
     <string name="verify">用户审核</string>
     <string name="about_us">关于我们</string>
     <string name="exit">退出</string>
+    <string name="title_activity_search">SearchActivity</string>
+    <string-array name="Academy">
+        <item>计算机学院</item>
+        <item>机电工程学院</item>
+        <item>轻工化工学院</item>
+        <item>土木与交通工程学院</item>
+        <item>外国语学院</item>
+        <item>信息工程学院</item>
+        <item>物理学院</item>
+        <item>材料与能源学院</item>
+        <item>环境工程学院</item>
+        <item>自动化学院学院</item>
+
+
+    </string-array>
 </resources>
