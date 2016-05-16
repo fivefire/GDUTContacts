@@ -8,9 +8,8 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
-    <uses-permission android:name="android.permission.SEND_SMS"/>
-
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
 
     <application
         android:allowBackup="true"
@@ -28,8 +27,9 @@
         <activity
             android:name=".ui.activity.SearchActivity"
             android:label="@string/title_activity_search"
-            android:theme="@style/AppTheme"></activity>
-        <activity android:name=".ui.activity.UserMassageActivity"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".ui.activity.UserMassageActivity" />
+        <activity android:name=".ui.activity.ClassifyAcativity"></activity>
     </application>
 
 </manifest>

@@ -16,6 +16,7 @@
             android:layout_weight="3"
             android:layout_height="wrap_content"
             android:completionThreshold="1"/>
+
         <Button
             android:id="@+id/SearchButton"
             android:layout_width="0dp"
@@ -23,6 +24,27 @@
             android:layout_height="wrap_content"
             android:text="@string/Search"/>
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Acadeny"
+            android:id="@+id/AnameSearch"
+            android:layout_gravity="center_horizontal" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Grade"
+            android:id="@+id/GradeSearch" />
     </LinearLayout>
 
 

@@ -19,7 +19,7 @@ import cn.bmob.v3.Bmob;
 public class SearchActivity extends BaseFragment.BaseActivity {
     private Toolbar mtoolbar;
     private AutoCompleteTextView SearchKey;
-    private Button SearchButton;
+    private Button SearchButton,ANameSearch,GradeSearch;
     String[] allName ={"张三","张五","李四","李世杰","陈华","陈美","ccsad","gdsfd","csadas"};
     AutoTextAdapter autoTextAdapter;
     User user;
@@ -52,7 +52,22 @@ public class SearchActivity extends BaseFragment.BaseActivity {
             public void onClick(View v) {
                 user = new User();
                 Intent intent = new Intent(SearchActivity.this,UserMassageActivity.class);
-
+                startActivity(intent);
+            }
+        });
+        ANameSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SearchActivity.this,ClassifyAcativity.class);
+                intent.putExtra("Message","AName");
+                startActivity(intent);
+            }
+        });
+        GradeSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SearchActivity.this,ClassifyAcativity.class);
+                intent.putExtra("Message","Grade");
                 startActivity(intent);
             }
         });
@@ -64,6 +79,8 @@ public class SearchActivity extends BaseFragment.BaseActivity {
         Bmob.initialize(this,"58d2bb059cc1244e252cea21b4313d0c");
         SearchKey = (AutoCompleteTextView)findViewById(R.id.SearchKey);
         SearchButton = (Button)findViewById(R.id.SearchButton);
+        ANameSearch = (Button)findViewById(R.id.AnameSearch);
+        GradeSearch = (Button)findViewById(R.id.GradeSearch);
     }
 
     @Override
