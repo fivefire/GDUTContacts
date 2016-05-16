@@ -19,6 +19,9 @@ import com.fivefire.app.gdutcontacts.ui.common.BaseFragment;
 
 import cn.bmob.v3.Bmob;
 
+/**
+ * 个人信息页面
+ */
 public class UserMassageActivity extends BaseFragment.BaseActivity {
     private Toolbar mtoolbar;
     private Button Call;
@@ -30,7 +33,6 @@ public class UserMassageActivity extends BaseFragment.BaseActivity {
     private TextView Grade;
     private TextView AName;
     private TextView Dno;
-
     String num;
     User user;
     @Override

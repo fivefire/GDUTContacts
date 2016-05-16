@@ -20,6 +20,7 @@ public class SearchActivity extends BaseFragment.BaseActivity {
     private Toolbar mtoolbar;
     private AutoCompleteTextView SearchKey;
     private Button SearchButton,ANameSearch,GradeSearch;
+    //测试用数组
     String[] allName ={"张三","张五","李四","李世杰","陈华","陈美","ccsad","gdsfd","csadas"};
     AutoTextAdapter autoTextAdapter;
     User user;
@@ -51,6 +52,9 @@ public class SearchActivity extends BaseFragment.BaseActivity {
             @Override
             public void onClick(View v) {
                 user = new User();
+                /**
+                 * 数据操作
+                 */
                 Intent intent = new Intent(SearchActivity.this,UserMassageActivity.class);
                 startActivity(intent);
             }
