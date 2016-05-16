@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.fivefire.app.gdutcontacts.ui.activity.ClassifyAcativity">
-
+    <include layout="@layout/toolbar_main"/>
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
