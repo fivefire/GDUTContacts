@@ -47,9 +47,7 @@ public class ClassifyAcativity extends BaseActivity {
 
     @Override
    protected void initView() {
-
         listView = (ListView)findViewById(R.id.listView);
-
    }
 
     @Override
