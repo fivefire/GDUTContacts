@@ -10,12 +10,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.fivefire.app.gdutcontacts.R;
+import com.fivefire.app.gdutcontacts.ui.common.BaseActivity;
 import com.fivefire.app.gdutcontacts.ui.common.BaseFragment;
 
 /**
  * 分类页面
  */
-public class ClassifyAcativity extends BaseFragment.BaseActivity {
+public class ClassifyAcativity extends BaseActivity {
 
     private String[] Contenx;
     private ListView listView;
@@ -30,7 +31,7 @@ public class ClassifyAcativity extends BaseFragment.BaseActivity {
             Contenx=resources.getStringArray(R.array.Academy);
         else if (massage.equals("Grade"))
             Contenx=resources.getStringArray(R.array.Grades);
-        arrayAdapter =  new ArrayAdapter<String>(ClassifyAcativity.this,R.layout.list,Contenx);
+        arrayAdapter =  new ArrayAdapter<>(ClassifyAcativity.this,R.layout.list,Contenx);
         listView.setAdapter(arrayAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

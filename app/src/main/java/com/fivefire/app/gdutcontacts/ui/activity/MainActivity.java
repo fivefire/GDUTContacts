@@ -7,11 +7,12 @@ import android.view.View;
 import android.widget.Button;
 
 import com.fivefire.app.gdutcontacts.R;
+import com.fivefire.app.gdutcontacts.ui.common.BaseActivity;
 import com.fivefire.app.gdutcontacts.ui.common.BaseFragment;
 
 import cn.bmob.v3.Bmob;
 
-public class MainActivity extends BaseFragment.BaseActivity {
+public class MainActivity extends BaseActivity {
     private Toolbar mToolbar;
     private Button Search;
 

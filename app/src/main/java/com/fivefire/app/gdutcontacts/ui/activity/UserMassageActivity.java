@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.fivefire.app.gdutcontacts.R;
 import com.fivefire.app.gdutcontacts.model.User;
+import com.fivefire.app.gdutcontacts.ui.common.BaseActivity;
 import com.fivefire.app.gdutcontacts.ui.common.BaseFragment;
 
 import cn.bmob.v3.Bmob;
@@ -22,7 +23,7 @@ import cn.bmob.v3.Bmob;
 /**
  * 个人信息页面
  */
-public class UserMassageActivity extends BaseFragment.BaseActivity {
+public class UserMassageActivity extends BaseActivity {
     private Toolbar mtoolbar;
     private Button Call;
     private Button SendMessage;
