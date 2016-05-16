@@ -12,11 +12,12 @@ import android.widget.Button;
 import com.fivefire.app.gdutcontacts.R;
 import com.fivefire.app.gdutcontacts.adapter.AutoTextAdapter;
 import com.fivefire.app.gdutcontacts.model.User;
+import com.fivefire.app.gdutcontacts.ui.common.BaseActivity;
 import com.fivefire.app.gdutcontacts.ui.common.BaseFragment;
 
 import cn.bmob.v3.Bmob;
 
-public class SearchActivity extends BaseFragment.BaseActivity {
+public class SearchActivity extends BaseActivity {
     private Toolbar mtoolbar;
     private AutoCompleteTextView SearchKey;
     private Button SearchButton,ANameSearch,GradeSearch;
