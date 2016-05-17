@@ -6,6 +6,8 @@ import android.database.sqlite.SQLiteDatabase;
 import com.fivefire.app.gdutcontacts.model.User;
 
 
+import java.util.ArrayList;
+
 /**
  * 数据操作类
  * Created by Landy on 2016/5/17.
@@ -53,4 +55,33 @@ public class DBUtils {
         SearchUser.close();
         return user;
     }
+    public static ArrayList<User> SearchUserByANameOrGrade(String key,String massage,SQLiteDatabase db)
+    {
+        ArrayList<User> list = new ArrayList<>();
+        Cursor cursor;
+        if (massage.equals("AName"))
+        {
+            cursor = db.rawQuery("select * from UserMassage where AName like ?",new String[]{key});
+        }
+        else
+        {
+            cursor = db.rawQuery("select * from UserMassage where Grade like ?",new String[]{key});
+        }
+        while (cursor.moveToNext())
+        {
+            User item = new User();
+            item.setPhone(cursor.getString(0));
+            item.setSphone(cursor.getString(1));
+            item.setName(cursor.getString(2));
+            item.setSno(cursor.getString(3));
+            item.setGrade(cursor.getInt(4));
+            item.setPassword(cursor.getString(5));
+            item.setDno(cursor.getString(6));
+            item.setAname(cursor.getString(8));
+            list.add(item);
+        }
+        cursor.close();
+        return list;
+    }
+
 }

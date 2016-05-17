@@ -32,5 +32,6 @@
     <string name="hint_tel">电话</string>
     <string name="hint_password">密码</string>
     <string name="SignIn">登录</string>
+    <string name="title_activity_double_massage">DoubleMassageActivity</string>
     <string name="logout">退出登录</string>
 </resources>
