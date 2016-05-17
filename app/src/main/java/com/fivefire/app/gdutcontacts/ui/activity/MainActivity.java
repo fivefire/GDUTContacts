@@ -4,25 +4,28 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
 import com.fivefire.app.gdutcontacts.R;
 import com.fivefire.app.gdutcontacts.ui.common.BaseActivity;
-import com.fivefire.app.gdutcontacts.ui.common.BaseFragment;
 
 import cn.bmob.v3.Bmob;
 
 public class MainActivity extends BaseActivity {
+    private static final String TAG = "MainActivity";
     private Toolbar mToolbar;
     private Button Search;
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
+    private NavigationView mNavigationView;
+
 
     @Override
     protected void initView() {
@@ -31,6 +34,7 @@ public class MainActivity extends BaseActivity {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open_drawer,
                 R.string.close_drawer);
+        mNavigationView = (NavigationView) findViewById(R.id.navigation_view);
         Search = (Button)findViewById(R.id.Search);
     }
 
@@ -46,6 +50,13 @@ public class MainActivity extends BaseActivity {
             }
             mDrawerToggle.syncState();
         }
+        mNavigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+                return onOptionsItemSelected(item);
+            }
+        });
 
         Search.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,9 +79,28 @@ public class MainActivity extends BaseActivity {
         mDrawerToggle.syncState();
     }
 
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return mDrawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
+        if (mDrawerToggle.onOptionsItemSelected(item)){
+            return true;
+        }
+        Log.d(TAG, "onOpinionSelected");
+        switch (item.getItemId()){
+            case R.id.nav_change_password:
+                break;
+            case R.id.nav_verify:
+                break;
+            case R.id.nav_about:
+                break;
+            case R.id.nav_exit:
+                finish();
+                break;
+            default:
+                return false;
+        }
+        return true;
     }
 
     @Override
