@@ -28,4 +28,7 @@
 
     </string-array>
     <string name="title_activity_login">LoginActivity</string>
+    <string name="hint_tel">电话</string>
+    <string name="hint_password">密码</string>
+    <string name="SignIn">登录</string>
 </resources>
