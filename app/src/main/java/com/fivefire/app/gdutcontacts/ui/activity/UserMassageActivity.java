@@ -3,20 +3,17 @@ package com.fivefire.app.gdutcontacts.ui.activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Looper;
-import android.provider.Contacts;
+import android.provider.ContactsContract;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.fivefire.app.gdutcontacts.Model.User;
 import com.fivefire.app.gdutcontacts.R;
-import com.fivefire.app.gdutcontacts.model.User;
 import com.fivefire.app.gdutcontacts.ui.common.BaseActivity;
-import com.fivefire.app.gdutcontacts.ui.common.BaseFragment;
 
 import cn.bmob.v3.Bmob;
 
@@ -43,6 +40,19 @@ public class UserMassageActivity extends BaseActivity {
             setTitle(getString(R.string.app_name));
         }
 
+        Intent intent =getIntent();
+        Bundle bundle = intent.getExtras();
+        user=(User) bundle.getSerializable("User");
+
+        Name.setText(user.getName());
+        Phone.setText(user.getPhone());
+        SPhone.setText(user.getSphone());
+        Grade.setText(String.valueOf(user.getGrade()));
+        Dno.setText(user.getDno());
+        AName.setText(user.getAname());
+
+
+
 
         Call.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,7 +70,7 @@ public class UserMassageActivity extends BaseActivity {
                 else
                 {
                     String[] temp={phone,sphone};
-                    Choice_Num_Call(v, temp);
+                    Choice_Num_Call(temp);
                 }
 
             }
@@ -77,28 +87,30 @@ public class UserMassageActivity extends BaseActivity {
                     Uri uri= Uri.parse("smsto:"+phone);
                     i.setData(uri);
                     startActivity(i);
-
                 }
                 else
                 {
                     String[] temp={phone,sphone};
-                    Choice_Num_Send(v,temp);
+                    Choice_Num_Send(temp);
                 }
             }
         });
         Save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Uri insert = Contacts.People.CONTENT_URI;
-                Intent i =new Intent(Intent.ACTION_INSERT,insert);
-                i.putExtra(Contacts.Intents.Insert.NAME, Name.getText().toString());
-                i.putExtra(Contacts.Intents.Insert.PHONE, Phone.getText().toString());
-                i.putExtra(Contacts.Intents.Insert.PHONE_TYPE, "长号");
-                i.putExtra(Contacts.Intents.Insert.SECONDARY_PHONE, SPhone.getText().toString());
-                i.putExtra(Contacts.Intents.Insert.SECONDARY_PHONE_TYPE, "短号");
-                i.putExtra(Contacts.Intents.Insert.POSTAL, Dno.getText().toString());
-                i.putExtra(Contacts.Intents.Insert.POSTAL_TYPE, "宿舍");
-                startActivity(i);
+
+                Uri insert =ContactsContract.Contacts.CONTENT_URI;
+                Intent intent = new Intent(Intent.ACTION_INSERT,insert);
+
+                intent.putExtra(ContactsContract.Intents.Insert.NAME,Name.getText().toString());
+                intent.putExtra(ContactsContract.Intents.Insert.PHONE,Phone.getText().toString());
+                intent.putExtra(ContactsContract.Intents.Insert.PHONE_TYPE,"长号");
+                intent.putExtra(ContactsContract.Intents.Insert.SECONDARY_PHONE, SPhone.getText().toString());
+                intent.putExtra(ContactsContract.Intents.Insert.SECONDARY_PHONE_TYPE, "短号");
+                intent.putExtra(ContactsContract.Intents.Insert.POSTAL, Dno.getText().toString());
+                intent.putExtra(ContactsContract.Intents.Insert.POSTAL_TYPE, "宿舍");
+                startActivity(intent);
+
             }
         });
     }
@@ -133,7 +145,7 @@ public class UserMassageActivity extends BaseActivity {
     protected int getContentViewId() {
         return R.layout.activity_user_massage;
     }
-    private void Choice_Num_Call(View v, final String[] temp) {
+    private void Choice_Num_Call(final String[] temp) {
         // TODO 自动生成的方法存根
         num=temp[1];
         AlertDialog.Builder builder = new AlertDialog.Builder(UserMassageActivity.this);
@@ -162,7 +174,7 @@ public class UserMassageActivity extends BaseActivity {
         builder.create().show();
 
     }
-    private void Choice_Num_Send(View v,final String[] temp)
+    private void Choice_Num_Send(final String[] temp)
     {
         num=temp[1];
         AlertDialog.Builder builder = new AlertDialog.Builder(UserMassageActivity.this);

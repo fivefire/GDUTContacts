@@ -5,14 +5,12 @@ import android.database.DataSetObserver;
 import android.text.Html;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AutoCompleteTextView;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ListAdapter;
 import android.widget.TextView;
-
 import java.util.ArrayList;
-import java.util.List;
+
 
 /**
  * Created by Landy on 2016/5/15.
