@@ -1,6 +1,5 @@
 package com.fivefire.app.gdutcontacts.ui.activity;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -9,10 +8,7 @@ import android.widget.Button;
 
 import com.fivefire.app.gdutcontacts.R;
 import com.fivefire.app.gdutcontacts.ui.common.BaseActivity;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
+import com.fivefire.app.gdutcontacts.ui.common.BaseFragment;
 
 import cn.bmob.v3.Bmob;
 
@@ -39,42 +35,12 @@ public class MainActivity extends BaseActivity {
     protected void initView() {
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         Bmob.initialize(this,"58d2bb059cc1244e252cea21b4313d0c");
+
         Search = (Button)findViewById(R.id.Search);
-        InsertDatabase();
     }
 
     @Override
     protected int getContentViewId() {
         return R.layout.activity_main;
-    }
-    private void InsertDatabase()
-    {
-
-        final String path=this.getFilesDir().getPath();
-        final String filename="temp.db";
-        File dir = new File(path);
-        if (!dir.exists())
-        {
-            if (!dir.mkdir())
-            {
-                showToast("路径创建失败");
-            }
-        }
-        File file = new File(path+"/"+filename);
-        try
-        {
-            InputStream inputStream = this.getApplication().getResources().openRawResource(R.raw.temp);
-            FileOutputStream fos = new FileOutputStream(file);
-            byte[] buf = new byte[inputStream.available()];
-            inputStream.read(buf);
-            fos.write(buf);
-            fos.flush();
-            fos.close();
-            inputStream.close();
-
-        }catch (Exception e)
-        {
-            e.printStackTrace();
-        }
     }
 }
