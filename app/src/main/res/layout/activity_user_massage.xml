@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.fivefire.app.gdutcontacts.ui.activity.UserMassageActivity">
+
     <include layout="@layout/toolbar_main"/>
 
     <TextView
