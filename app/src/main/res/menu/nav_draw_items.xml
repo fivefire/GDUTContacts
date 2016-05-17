@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <group android:checkableBehavior="all">
+    <group android:checkableBehavior="none">
         <item
-            android:id="@+id/navItem1"
+            android:id="@+id/nav_change_password"
+            android:icon="@drawable/ic_account_box_black_24dp"
             android:title="@string/change_password"/>
         <item
-            android:id="@+id/navItem2"
+            android:id="@+id/nav_verify"
+            android:icon="@drawable/ic_gavel_black_24dp"
             android:title="@string/verify"/>
         <item
-            android:id="@+id/navItem3"
+            android:id="@+id/nav_about"
+            android:icon="@drawable/ic_info_black_24dp"
             android:title="@string/about_us"/>
         <item
-            android:id="@+id/navItem4"
+            android:id="@+id/nav_exit"
+            android:icon="@drawable/ic_exit_to_app_black_24dp"
             android:title="@string/exit"/>
     </group>
 </menu>
