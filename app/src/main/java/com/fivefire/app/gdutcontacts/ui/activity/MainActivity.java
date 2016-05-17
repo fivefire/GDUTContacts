@@ -91,6 +91,8 @@ public class MainActivity extends BaseActivity {
             case R.id.nav_change_password:
                 break;
             case R.id.nav_verify:
+                Intent intent = new Intent(this, VerifyActivity.class);
+                startActivity(intent);
                 break;
             case R.id.nav_about:
                 break;
