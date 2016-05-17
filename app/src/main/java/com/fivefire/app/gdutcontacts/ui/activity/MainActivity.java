@@ -16,6 +16,10 @@ import android.widget.Button;
 import com.fivefire.app.gdutcontacts.R;
 import com.fivefire.app.gdutcontacts.ui.common.BaseActivity;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+
 import cn.bmob.v3.Bmob;
 
 public class MainActivity extends BaseActivity {
@@ -36,6 +40,7 @@ public class MainActivity extends BaseActivity {
                 R.string.close_drawer);
         mNavigationView = (NavigationView) findViewById(R.id.navigation_view);
         Search = (Button)findViewById(R.id.Search);
+        InsertDatabase();
     }
 
     @Override
@@ -66,7 +71,36 @@ public class MainActivity extends BaseActivity {
             }
         });
     }
+    private void InsertDatabase()
+    {
 
+        final String path=this.getFilesDir().getPath();
+        final String filename="temp.db";
+        File dir = new File(path);
+        if (!dir.exists())
+        {
+            if (!dir.mkdir())
+            {
+                showToast("路径创建失败");
+            }
+        }
+        File file = new File(path+"/"+filename);
+        try
+        {
+            InputStream inputStream = this.getApplication().getResources().openRawResource(R.raw.temp);
+            FileOutputStream fos = new FileOutputStream(file);
+            byte[] buf = new byte[inputStream.available()];
+            inputStream.read(buf);
+            fos.write(buf);
+            fos.flush();
+            fos.close();
+            inputStream.close();
+
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
