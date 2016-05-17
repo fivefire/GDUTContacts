@@ -34,4 +34,6 @@
     <string name="SignIn">登录</string>
     <string name="forgot_your_password">忘了密码？</string>
     <string name="register">注册</string>
+    <string name="title_activity_double_massage">DoubleMassageActivity</string>
+    <string name="logout">退出登录</string>
 </resources>
