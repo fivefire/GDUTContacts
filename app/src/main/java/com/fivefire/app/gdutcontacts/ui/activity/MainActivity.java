@@ -40,7 +40,7 @@ public class MainActivity extends BaseActivity {
                 R.string.close_drawer);
         mNavigationView = (NavigationView) findViewById(R.id.navigation_view);
         Search = (Button)findViewById(R.id.Search);
-        InsertDatabase();
+        insertDatabase();
     }
 
     @Override
@@ -71,7 +71,8 @@ public class MainActivity extends BaseActivity {
             }
         });
     }
-    private void InsertDatabase()
+
+    private void insertDatabase()
     {
 
         final String path=this.getFilesDir().getPath();
