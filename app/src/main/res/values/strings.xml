@@ -28,4 +28,5 @@
         <item>2014</item>
         <item>2015</item>
     </string-array>
+    <string name="title_activity_login">LoginActivity</string>
 </resources>
