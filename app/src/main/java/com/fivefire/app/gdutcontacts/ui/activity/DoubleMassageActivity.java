@@ -8,9 +8,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.fivefire.app.gdutcontacts.Model.User;
 import com.fivefire.app.gdutcontacts.R;
 import com.fivefire.app.gdutcontacts.adapter.DoubleMassageAdapter;
+import com.fivefire.app.gdutcontacts.model.User;
 import com.fivefire.app.gdutcontacts.ui.common.BaseActivity;
 
 import java.util.ArrayList;
