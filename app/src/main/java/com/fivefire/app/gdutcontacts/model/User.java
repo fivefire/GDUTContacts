@@ -1,4 +1,4 @@
-package com.fivefire.app.gdutcontacts.Model;
+package com.fivefire.app.gdutcontacts.model;
 
 import java.io.Serializable;
 

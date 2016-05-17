@@ -29,7 +29,9 @@
         <item>2015</item>
     </string-array>
     <string name="title_activity_login">LoginActivity</string>
-    <string name="hint_tel">电话</string>
-    <string name="hint_password">密码</string>
+    <string name="hint_tel">请输入账号/电话</string>
+    <string name="hint_password">请输入密码</string>
     <string name="SignIn">登录</string>
+    <string name="forgot_your_password">忘了密码？</string>
+    <string name="register">注册</string>
 </resources>

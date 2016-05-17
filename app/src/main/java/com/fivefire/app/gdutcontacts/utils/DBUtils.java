@@ -3,7 +3,8 @@ package com.fivefire.app.gdutcontacts.utils;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.fivefire.app.gdutcontacts.Model.User;
+import com.fivefire.app.gdutcontacts.model.User;
+
 
 /**
  * 数据操作类

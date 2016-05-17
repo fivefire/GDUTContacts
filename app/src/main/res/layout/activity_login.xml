@@ -2,52 +2,93 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#c0c0c0"
+    android:background="@drawable/login_bg"
     android:gravity="center"
     android:orientation="vertical">
-    
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/login_logo" />
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical"
         android:layout_marginBottom="12dp"
         android:layout_marginLeft="12dp"
         android:layout_marginRight="12dp"
         android:layout_marginTop="12dp"
-        android:background="@drawable/shape_corner">
+        android:background="@drawable/shape_corner"
+        android:gravity="center"
+        android:orientation="vertical">
 
-    <com.fivefire.app.gdutcontacts.ui.common.ClearEditText
-        android:id="@+id/login_username"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:drawableLeft="@drawable/username_tel"
-        android:background="@drawable/bg_edittext"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:drawableRight="@drawable/delete_select"
-        android:inputType="phone"
-        android:hint="@string/hint_tel"
-        />
+        <com.fivefire.app.gdutcontacts.ui.common.ClearEditText
+            android:id="@+id/login_username"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_edittext"
+            android:drawablePadding="10dp"
+            android:drawableRight="@drawable/delete_select"
+            android:hint="@string/hint_tel"
+            android:inputType="phone"
+            android:textSize="24sp" />
+
         <com.fivefire.app.gdutcontacts.ui.common.ClearEditText
             android:id="@+id/login_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:drawableRight="@drawable/delete_select"
-            android:drawableLeft="@drawable/login_password"
-            android:background="@drawable/bg_edittext"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:inputType="textPassword"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_edittext"
+            android:drawablePadding="10dp"
+            android:drawableRight="@drawable/delete_select"
             android:hint="@string/hint_password"
-            />
+            android:inputType="textPassword"
+            android:textSize="24sp" />
+
         <Button
             android:id="@+id/signIn"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/SignIn"/>
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/btn_select"
+            android:text="@string/SignIn" />
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+            <Button
+                android:id="@+id/login_forgot_pass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="8dp"
+                android:background="@drawable/btn_register"
+                android:text="@string/forgot_your_password"
+                android:textColor="@color/primary_dark"
+                android:textSize="12sp"
+                />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginRight="8dp"
+                android:background="@drawable/btn_register"
+                android:text="@string/register"
+                android:layout_gravity="right"
+                android:textSize="12sp"
+                android:textColor="@color/primary_dark"/>
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
