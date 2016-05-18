@@ -9,6 +9,9 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:scaleX="0.8"
+        android:scaleY="0.8"
         android:layout_gravity="center"
         android:src="@drawable/login_logo" />
 
