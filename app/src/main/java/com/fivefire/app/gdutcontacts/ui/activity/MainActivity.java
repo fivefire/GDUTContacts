@@ -138,6 +138,10 @@ public class MainActivity extends BaseActivity {
             case R.id.nav_exit:
                 finish();
                 break;
+            case R.id.action_logout:
+                intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+                break;
             default:
                 return false;
         }
