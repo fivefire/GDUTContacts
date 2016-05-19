@@ -32,13 +32,16 @@
         <activity android:name=".ui.activity.ClassifyAcativity" />
         <activity
             android:name=".ui.activity.VerifyActivity"
-            android:parentActivityName=".ui.activity.MainActivity">
-        </activity>
+            android:parentActivityName=".ui.activity.MainActivity" />
         <activity
             android:name=".ui.activity.LoginActivity"
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme">
         </activity>
+        <activity
+            android:name=".ui.activity.RegisterActivity"
+            android:label="用户注册" />
+        <activity android:name=".ui.activity.FgPasswordActivity"></activity>
     </application>
 
 </manifest>
