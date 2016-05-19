@@ -19,14 +19,14 @@
             <include layout="@layout/toolbar_main"/>
         </android.support.design.widget.AppBarLayout>
         <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             >
-            <TextView
-                android:text="Hello World!"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+            <com.fivefire.app.gdutcontacts.widget.dialpad.NineKeyDialpad
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
             <Button
                 android:id="@+id/Search"
                 android:text="分类查找"

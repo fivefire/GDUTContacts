@@ -36,4 +36,7 @@
     <string name="register">注册</string>
     <string name="title_activity_double_massage">DoubleMassageActivity</string>
     <string name="logout">退出登录</string>
+    <string name="send_msg">发送信息</string>
+    <string name="call">拨打</string>
+    <string name="hide">隐藏</string>
 </resources>
