@@ -28,6 +28,7 @@
         <item>2014</item>
         <item>2015</item>
     </string-array>
+
     <string name="title_activity_login">LoginActivity</string>
     <string name="hint_tel">请输入账号/电话</string>
     <string name="hint_password">请输入密码</string>
@@ -36,4 +37,15 @@
     <string name="register">注册</string>
     <string name="title_activity_double_massage">DoubleMassageActivity</string>
     <string name="logout">退出登录</string>
+    <string name="cancel">取消</string>
+    <string name="registerInfo">注册信息</string>
+    <string name="registerPho">请输入手机号</string>
+    <string name="phone">手机：</string>
+    <string name="sno">学号：</string>
+    <string name="inputSno">请输入学号</string>
+    <string name="name">姓名：</string>
+    <string name="inputName">请输入姓名</string>
+    <string name="password">密码：</string>
+    <string name="ensurePassword">请再次确认密码</string>
+
 </resources>
