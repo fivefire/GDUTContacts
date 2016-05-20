@@ -11,6 +11,8 @@
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="@dimen/font_larger"
+        android:inputType="phone"
         app:clean_icon="@drawable/ic_backspace_black_24dp"
         />
     <TableLayout
@@ -93,13 +95,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:keywords=""
-                app:number="0"
+                app:number="*"
                 />
             <com.fivefire.app.gdutcontacts.widget.dialpad.ninekeybutton.NineKeyButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:keywords=""
-                app:number="*"
+                app:number="0"
                 />
             <com.fivefire.app.gdutcontacts.widget.dialpad.ninekeybutton.NineKeyButton
                 android:layout_width="match_parent"
@@ -142,7 +144,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="隐藏"
+                android:text="@string/hide"
                 android:gravity="center"
                 android:layout_column="2"
                 />

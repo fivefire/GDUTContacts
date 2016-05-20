@@ -17,8 +17,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    //下面是加载SO库
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
 }
 dependencies {
+//    所有的jar包下面这一句就加了，应该不需要添加新语句吧
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.3.0'
@@ -27,9 +34,4 @@ dependencies {
     compile 'com.android.support:support-v4:23.3.0'
     compile 'com.android.support:cardview-v7:23.3.0'
     compile 'com.makeramen:roundedimageview:2.2.1'
-    compile files('libs/Bmob_Push_V0.8beta_20160420.jar')
-    compile files('libs/BmobSDK_V3.4.6_0415.jar')
-    compile files('libs/okhttp-2.4.0.jar')
-    compile files('libs/okio-1.4.0.jar')
-    compile files('libs/org.apache.http.legacy.jar')
 }

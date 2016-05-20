@@ -7,9 +7,12 @@ import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -115,7 +118,17 @@ public class DeletableEditText extends EditText implements View.OnFocusChangeLis
                 break;
         }
         return super.onTouchEvent(event);
+    }
 
+    /**
+     * 在光标处插入文本
+     * @param text the text to insert.
+     */
+    public void insertByCursor(CharSequence text) {
+        if (text != null) {
+            int start = getSelectionStart();
+            getText().insert(start, text);
+        }
     }
 
 
@@ -154,5 +167,6 @@ public class DeletableEditText extends EditText implements View.OnFocusChangeLis
     public void afterTextChanged(Editable s) {
 
     }
+
 
 }
