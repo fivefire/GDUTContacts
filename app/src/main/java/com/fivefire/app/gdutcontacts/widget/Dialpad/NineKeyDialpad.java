@@ -1,15 +1,10 @@
-package com.fivefire.app.gdutcontacts.widget.dialpad;
+package com.fivefire.app.gdutcontacts.widget.Dialpad;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.text.InputType;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TableLayout;
@@ -17,10 +12,10 @@ import android.widget.TableRow;
 import android.widget.Toast;
 
 import com.fivefire.app.gdutcontacts.R;
-import com.fivefire.app.gdutcontacts.widget.dialpad.ninekeybutton.INineKeyButton;
-import com.fivefire.app.gdutcontacts.widget.dialpad.ninekeybutton.NineKeyButton;
-import com.fivefire.app.gdutcontacts.widget.dialpad.query.IQuery;
-import com.fivefire.app.gdutcontacts.widget.dialpad.searchview.DeletableEditText;
+import com.fivefire.app.gdutcontacts.widget.Dialpad.ninekeybutton.INineKeyButton;
+import com.fivefire.app.gdutcontacts.widget.Dialpad.ninekeybutton.NineKeyButton;
+import com.fivefire.app.gdutcontacts.widget.Dialpad.Query.IQuery;
+import com.fivefire.app.gdutcontacts.widget.Dialpad.searchview.DeletableEditText;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +23,7 @@ import java.util.List;
 /**
  * Created by MicroStudent on 2016/5/19.
  */
-public class NineKeyDialpad extends FrameLayout implements INineKeyDialpad, View.OnClickListener {
+public class NineKeyDialpad extends FrameLayout implements iNineKeyDialpad, View.OnClickListener {
 
     private static final String TAG = "NineKeyDialpad";
     private List<INineKeyButton> mNineKeyButtons;

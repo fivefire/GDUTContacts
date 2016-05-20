@@ -1,6 +1,6 @@
-package com.fivefire.app.gdutcontacts.widget.dialpad;
+package com.fivefire.app.gdutcontacts.widget.Dialpad;
 
-import com.fivefire.app.gdutcontacts.widget.dialpad.query.IQuery;
+import com.fivefire.app.gdutcontacts.widget.Dialpad.Query.IQuery;
 
 /**
  * Created by MicroStudent on 2016/5/19.
