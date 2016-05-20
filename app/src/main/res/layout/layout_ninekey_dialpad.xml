@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <com.fivefire.app.gdutcontacts.widget.Dialpad.searchview.DeletableEditText
+    <com.fivefire.app.gdutcontacts.widget.dialpad.searchview.DeletableEditText
         android:id="@+id/et"
         android:layout_margin="@dimen/spacing_normal"
         android:gravity="center"
@@ -25,19 +25,19 @@
         <TableRow
             android:layout_marginTop="@dimen/spacing_normal"
             >
-            <com.fivefire.app.gdutcontacts.widget.Dialpad.ninekeybutton.NineKeyButton
+            <com.fivefire.app.gdutcontacts.widget.dialpad.ninekeybutton.NineKeyButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:keywords=""
                 app:number="1"
                 />
-            <com.fivefire.app.gdutcontacts.widget.Dialpad.ninekeybutton.NineKeyButton
+            <com.fivefire.app.gdutcontacts.widget.dialpad.ninekeybutton.NineKeyButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:keywords="ABC"
                 app:number="2"
                 />
-            <com.fivefire.app.gdutcontacts.widget.Dialpad.ninekeybutton.NineKeyButton
+            <com.fivefire.app.gdutcontacts.widget.dialpad.ninekeybutton.NineKeyButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:keywords="DEF"
@@ -47,19 +47,19 @@
         <TableRow
             android:layout_marginTop="@dimen/spacing_normal"
             >
-            <com.fivefire.app.gdutcontacts.widget.Dialpad.ninekeybutton.NineKeyButton
+            <com.fivefire.app.gdutcontacts.widget.dialpad.ninekeybutton.NineKeyButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:keywords="GHI"
                 app:number="4"
                 />
-            <com.fivefire.app.gdutcontacts.widget.Dialpad.ninekeybutton.NineKeyButton
+            <com.fivefire.app.gdutcontacts.widget.dialpad.ninekeybutton.NineKeyButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:keywords="JKL"
                 app:number="5"
                 />
-            <com.fivefire.app.gdutcontacts.widget.Dialpad.ninekeybutton.NineKeyButton
+            <com.fivefire.app.gdutcontacts.widget.dialpad.ninekeybutton.NineKeyButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:keywords="MNO"
@@ -69,19 +69,19 @@
         <TableRow
             android:layout_marginTop="@dimen/spacing_normal"
             >
-            <com.fivefire.app.gdutcontacts.widget.Dialpad.ninekeybutton.NineKeyButton
+            <com.fivefire.app.gdutcontacts.widget.dialpad.ninekeybutton.NineKeyButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:keywords="PQRS"
                 app:number="7"
                 />
-            <com.fivefire.app.gdutcontacts.widget.Dialpad.ninekeybutton.NineKeyButton
+            <com.fivefire.app.gdutcontacts.widget.dialpad.ninekeybutton.NineKeyButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:keywords="TUV"
                 app:number="8"
                 />
-            <com.fivefire.app.gdutcontacts.widget.Dialpad.ninekeybutton.NineKeyButton
+            <com.fivefire.app.gdutcontacts.widget.dialpad.ninekeybutton.NineKeyButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:keywords="WXYZ"
@@ -91,19 +91,19 @@
         <TableRow
             android:layout_marginTop="@dimen/spacing_normal"
             >
-            <com.fivefire.app.gdutcontacts.widget.Dialpad.ninekeybutton.NineKeyButton
+            <com.fivefire.app.gdutcontacts.widget.dialpad.ninekeybutton.NineKeyButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:keywords=""
                 app:number="*"
                 />
-            <com.fivefire.app.gdutcontacts.widget.Dialpad.ninekeybutton.NineKeyButton
+            <com.fivefire.app.gdutcontacts.widget.dialpad.ninekeybutton.NineKeyButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:keywords=""
                 app:number="0"
                 />
-            <com.fivefire.app.gdutcontacts.widget.Dialpad.ninekeybutton.NineKeyButton
+            <com.fivefire.app.gdutcontacts.widget.dialpad.ninekeybutton.NineKeyButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:keywords=""

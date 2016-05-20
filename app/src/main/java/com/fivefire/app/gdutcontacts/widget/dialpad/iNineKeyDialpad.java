@@ -1,14 +1,14 @@
-package com.fivefire.app.gdutcontacts.widget.Dialpad;
+package com.fivefire.app.gdutcontacts.widget.dialpad;
 
 import android.support.v7.widget.RecyclerView;
 
-import com.fivefire.app.gdutcontacts.widget.Dialpad.Query.IQuery;
+import com.fivefire.app.gdutcontacts.widget.dialpad.query.IQuery;
 
 /**
  *
  * Created by MicroStudent on 2016/5/19.
  */
-public interface iNineKeyDialpad {
+public interface INineKeyDialpad {
     /**
      * 显示九宫格面板
      */

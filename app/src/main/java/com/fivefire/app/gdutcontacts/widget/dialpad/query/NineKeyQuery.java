@@ -1,6 +1,7 @@
-package com.fivefire.app.gdutcontacts.widget.Dialpad.Query;
+package com.fivefire.app.gdutcontacts.widget.dialpad.query;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**

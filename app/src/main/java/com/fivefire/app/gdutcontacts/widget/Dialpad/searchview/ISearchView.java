@@ -1,4 +1,4 @@
-package com.fivefire.app.gdutcontacts.widget.Dialpad.searchview;
+package com.fivefire.app.gdutcontacts.widget.dialpad.searchview;
 
 /**
  * Created by MicroStudent on 2016/5/19.
