@@ -1,236 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:background="@color/primary">
+    android:fitsSystemWindows="true"
+    tools:context="com.fivefire.app.gdutcontacts.ui.activity.RegisterActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textSize="32sp"
-        android:textColor="@color/primary_text"
-        android:text="@string/registerInfo"/>
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/shape_corner"
-        android:orientation="vertical"
-        android:layout_margin="10dp">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/shape_corner"
-        android:layout_marginTop="2dp"
-        android:layout_marginLeft="2dp"
-        android:layout_marginRight="2dp"
-        android:orientation="horizontal"
-        android:weightSum="6">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/phone"
-            android:textSize="22sp"
-            android:textColor="@color/primary_text"
-            android:gravity="center"
-            android:layout_marginTop="2dp"
-            android:layout_weight="4"/>
-        <com.fivefire.app.gdutcontacts.ui.common.ClearEditText
-            android:id="@+id/register_phone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="phone"
-            android:layout_weight="2"
-            android:background="@drawable/bg_edittext"
-            android:drawableRight="@drawable/delete_select"
-            android:drawablePadding="2dp"
-            android:textSize="20sp"
-            android:hint="@string/registerPho"
-            android:layout_marginTop="2dp"
-            android:layout_marginRight="2dp"/>
-
-    </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_corner"
-            android:layout_marginTop="2dp"
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="2dp"
-            android:orientation="horizontal"
-            android:weightSum="6">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/sno"
-                android:textSize="22sp"
-                android:textColor="@color/primary_text"
-                android:gravity="center"
-                android:layout_marginTop="2dp"
-                android:layout_weight="4"/>
-            <com.fivefire.app.gdutcontacts.ui.common.ClearEditText
-                android:id="@+id/register_sno"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:background="@drawable/bg_edittext"
-                android:drawableRight="@drawable/delete_select"
-                android:drawablePadding="2dp"
-                android:textSize="20sp"
-                android:inputType="number"
-                android:hint="@string/inputSno"
-                android:layout_marginTop="2dp"
-                android:layout_marginRight="2dp"/>
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_corner"
-            android:layout_marginTop="2dp"
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="2dp"
-            android:layout_marginBottom="2dp"
-            android:orientation="horizontal"
-            android:weightSum="6">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/name"
-                android:textSize="22sp"
-                android:textColor="@color/primary_text"
-                android:gravity="center"
-                android:layout_marginTop="2dp"
-                android:layout_weight="4"/>
-            <com.fivefire.app.gdutcontacts.ui.common.ClearEditText
-                android:id="@+id/register_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:background="@drawable/bg_edittext"
-                android:drawableRight="@drawable/delete_select"
-                android:drawablePadding="2dp"
-                android:textSize="20sp"
-                android:hint="@string/inputName"
-                android:inputType="text"
-                android:layout_marginTop="2dp"
-                android:layout_marginRight="2dp"
-                android:layout_marginBottom="2dp"/>
-
-        </LinearLayout>
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/shape_corner"
-        android:orientation="vertical"
-        android:layout_margin="10dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_corner"
-            android:layout_marginTop="2dp"
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="2dp"
-            android:layout_marginBottom="2dp"
-            android:orientation="horizontal"
-            android:weightSum="6">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/password"
-                android:textSize="22sp"
-                android:textColor="@color/primary_text"
-                android:gravity="center"
-                android:layout_marginTop="2dp"
-                android:layout_weight="4"/>
-            <com.fivefire.app.gdutcontacts.ui.common.ClearEditText
-                android:id="@+id/register_password1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:background="@drawable/bg_edittext"
-                android:drawableRight="@drawable/delete_select"
-                android:drawablePadding="2dp"
-                android:textSize="20sp"
-                android:hint="@string/hint_password"
-                android:inputType="textPassword"
-                android:layout_marginTop="2dp"
-                android:layout_marginRight="2dp"
-                android:layout_marginBottom="2dp"/>
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_corner"
-            android:layout_marginTop="2dp"
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="2dp"
-            android:layout_marginBottom="2dp"
-            android:orientation="horizontal"
-            android:weightSum="6">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/password"
-                android:textSize="22sp"
-                android:textColor="@color/primary_text"
-                android:gravity="center"
-                android:layout_marginTop="2dp"
-                android:layout_weight="4"/>
-            <com.fivefire.app.gdutcontacts.ui.common.ClearEditText
-                android:id="@+id/register_password2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:background="@drawable/bg_edittext"
-                android:drawableRight="@drawable/delete_select"
-                android:drawablePadding="2dp"
-                android:textSize="20sp"
-                android:hint="@string/ensurePassword"
-                android:inputType="textPassword"
-                android:layout_marginTop="2dp"
-                android:layout_marginRight="2dp"
-                android:layout_marginBottom="2dp"/>
-
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_height="match_parent"
         android:gravity="center"
-        android:paddingTop="10dp"
-        >
-        <Button
-            android:id="@+id/register_ensure"
-            android:layout_width="wrap_content"
+        android:orientation="vertical">
+
+        <com.fivefire.app.gdutcontacts.ui.common.ClearEditText
+            android:id="@+id/register_pho"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@drawable/btn_register"
-            android:layout_marginRight="20dp"
+            android:background="@drawable/bg_edittext"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="4dp"
+            android:paddingLeft="18dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:inputType="phone"
+            android:hint="@string/registerPho"/>
+        <com.fivefire.app.gdutcontacts.ui.common.ClearEditText
+            android:id="@+id/register_sno"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_edittext"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="4dp"
+            android:paddingLeft="18dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:inputType="number"
+            android:hint="@string/inputSno"/>
+        <com.fivefire.app.gdutcontacts.ui.common.ClearEditText
+            android:id="@+id/register_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_edittext"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="4dp"
+            android:paddingLeft="18dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:inputType="text"
+            android:hint="@string/inputName"/>
+        <com.fivefire.app.gdutcontacts.ui.common.ClearEditText
+            android:id="@+id/register_password1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_edittext"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="4dp"
+            android:paddingLeft="18dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:inputType="textPassword"
+            android:hint="@string/hint_password"/>
+        <com.fivefire.app.gdutcontacts.ui.common.ClearEditText
+            android:id="@+id/register_password2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_edittext"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="24dp"
+            android:paddingLeft="18dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:inputType="textPassword"
+            android:hint="@string/ensurePassword"/>
+
+        <Button
+            android:id="@+id/register_btn_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/btn_select"
             android:text="@string/register"/>
-        <Button
-            android:id="@+id/register_cancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="20dp"
-            android:background="@drawable/btn_register"
-            android:text="@string/cancel"/>
     </LinearLayout>
 
-</LinearLayout>
+
+
+</android.support.design.widget.CoordinatorLayout>

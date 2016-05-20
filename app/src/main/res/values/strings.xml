@@ -41,15 +41,13 @@
     <string name="call">拨打</string>
     <string name="hide">隐藏</string>
     <string name="cancel">取消</string>
-    <string name="registerInfo">注册信息</string>
     <string name="registerPho">请输入手机号</string>
-    <string name="phone">手机：</string>
-    <string name="sno">学号：</string>
     <string name="inputSno">请输入学号</string>
     <string name="name">姓名：</string>
     <string name="inputName">请输入姓名</string>
     <string name="password">密码：</string>
     <string name="ensurePassword">请再次确认密码</string>
+    <string name="title_activity_register">RegisterActivity</string>
     <string name="classified_query">分类查找</string>
     <string name="account_circle">联系人列表头像</string>
     <string name="see_more">查看详情</string>
