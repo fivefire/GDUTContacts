@@ -50,5 +50,6 @@
     <string name="inputName">请输入姓名</string>
     <string name="password">密码：</string>
     <string name="ensurePassword">请再次确认密码</string>
+    <string name="classified_query">分类查找</string>
 
 </resources>

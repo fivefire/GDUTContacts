@@ -18,21 +18,7 @@
             android:layout_height="wrap_content">
             <include layout="@layout/toolbar_main"/>
         </android.support.design.widget.AppBarLayout>
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            >
-            <com.fivefire.app.gdutcontacts.widget.dialpad.NineKeyDialpad
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-            <Button
-                android:id="@+id/Search"
-                android:text="分类查找"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
+        <include layout="@layout/layout_main_content"/>
     </android.support.design.widget.CoordinatorLayout>
     <android.support.design.widget.NavigationView
         android:id="@+id/navigation_view"

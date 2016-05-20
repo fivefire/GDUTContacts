@@ -26,11 +26,9 @@ import cn.bmob.v3.Bmob;
 public class MainActivity extends BaseActivity {
     private static final String TAG = "MainActivity";
     private Toolbar mToolbar;
-    private Button Search;
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
-
 
     @Override
     protected void initView() {
@@ -40,7 +38,6 @@ public class MainActivity extends BaseActivity {
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open_drawer,
                 R.string.close_drawer);
         mNavigationView = (NavigationView) findViewById(R.id.navigation_view);
-        Search = (Button)findViewById(R.id.Search);
         insertDatabase();
     }
 
@@ -61,14 +58,6 @@ public class MainActivity extends BaseActivity {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
                 return onOptionsItemSelected(item);
-            }
-        });
-
-        Search.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent =new Intent(MainActivity.this,SearchActivity.class);
-                startActivity(intent);
             }
         });
     }
@@ -140,6 +129,10 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.action_logout:
                 intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.action_classified_query:
+                intent = new Intent(this, SearchActivity.class);
                 startActivity(intent);
                 break;
             default:
