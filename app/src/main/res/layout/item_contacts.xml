@@ -1,6 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/list_item_height_large"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+    <ImageView
+        android:id="@+id/iv"
+        android:src="@drawable/ic_account_circle_black_36dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/spacing_normal"
+        android:layout_marginStart="@dimen/spacing_normal"
+        android:contentDescription="@string/account_circle"
+        android:layout_width="@dimen/image_normal"
+        android:layout_height="@dimen/image_normal" />
+    <FrameLayout
+        android:layout_margin="@dimen/spacing_small"
+        android:layout_toRightOf="@id/iv"
+        android:layout_toEndOf="@id/iv"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/tv_name"
+            tools:text = "张卫平"
+            android:textSize="@dimen/font_large"
+            android:textStyle="bold"
+            android:layout_gravity="top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_phone"
+            tools:text="18819477777"
+            android:layout_gravity="bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </FrameLayout>
+    <ImageView
+        android:id="@+id/bt"
+        android:src="@drawable/ic_description_black_36dp"
+        android:contentDescription="@string/see_more"
+        android:scaleType="center"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="@dimen/spacing_small"
+        android:layout_width="@dimen/image_normal"
+        android:layout_height="@dimen/image_normal" />
 
-</LinearLayout>
+    <View
+        android:background="@color/gray"
+        android:layout_toStartOf="@id/bt"
+        android:layout_toLeftOf="@id/bt"
+        android:layout_width="1px"
+        android:layout_height="match_parent"/>
+</RelativeLayout>

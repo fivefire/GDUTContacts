@@ -1,11 +1,13 @@
 package com.fivefire.app.gdutcontacts;
 
+import com.fivefire.app.gdutcontacts.widget.dialpad.query.IUser;
+
 import cn.bmob.v3.BmobObject;
 
 /**
  * Created by djd14 on 2016/5/12.
  */
-public class User extends BmobObject {
+public class User extends BmobObject implements IUser{
     String Phone;
     String Sphone;
     String Name;
@@ -16,6 +18,11 @@ public class User extends BmobObject {
     Number Tag;
     String Aname;
     String Note;
+
+    public User(String name, String phone) {
+        Phone = phone;
+        Name = name;
+    }
 
     public User(String tableName, String note, String aname, String dno, Number tag, String password, Number grade, String sno, String name, String sphone, String phone) {
         super(tableName);//the  user class ,the same the table
@@ -31,9 +38,9 @@ public class User extends BmobObject {
         Sphone = sphone;
         Phone = phone;
     }
-public User(){
-    this.setTableName("User");
-}
+    public User(){
+        this.setTableName("User");
+    }
     public User(String note, String aname, String dno, Number tag, String password, Number grade, String sno, String name, String sphone, String phone) {
         this.setTableName("User");
         Note = note;

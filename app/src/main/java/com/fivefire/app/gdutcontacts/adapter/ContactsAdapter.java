@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.fivefire.app.gdutcontacts.R;
 import com.fivefire.app.gdutcontacts.User;
@@ -32,7 +33,8 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
 
     @Override
     public void onBindViewHolder(ContactsViewHolder holder, int position) {
-
+        holder.name.setText(mData.get(position).getName());
+        holder.phone.setText(mData.get(position).getPhone());
     }
 
     @Override
@@ -97,9 +99,11 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
 
 
     class ContactsViewHolder extends RecyclerView.ViewHolder {
-
+        TextView name, phone;
         public ContactsViewHolder(View itemView) {
             super(itemView);
+            name = (TextView) itemView.findViewById(R.id.tv_name);
+            phone = (TextView) itemView.findViewById(R.id.tv_phone);
         }
     }
 }

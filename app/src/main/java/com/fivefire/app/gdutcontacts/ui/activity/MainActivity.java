@@ -7,6 +7,8 @@ import android.os.PersistableBundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -15,11 +17,16 @@ import android.view.View;
 import android.widget.Button;
 
 import com.fivefire.app.gdutcontacts.R;
+import com.fivefire.app.gdutcontacts.User;
+import com.fivefire.app.gdutcontacts.adapter.ContactsAdapter;
 import com.fivefire.app.gdutcontacts.ui.common.BaseActivity;
+import com.fivefire.app.gdutcontacts.widget.dialpad.NineKeyDialpad;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import cn.bmob.v3.Bmob;
 
@@ -29,6 +36,8 @@ public class MainActivity extends BaseActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
+    private RecyclerView mRecyclerView;
+    private NineKeyDialpad mNineKeyDialpad;
 
     @Override
     protected void initView() {
@@ -38,6 +47,8 @@ public class MainActivity extends BaseActivity {
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open_drawer,
                 R.string.close_drawer);
         mNavigationView = (NavigationView) findViewById(R.id.navigation_view);
+        mRecyclerView = (RecyclerView) findViewById(R.id.rv);
+        mNineKeyDialpad = (NineKeyDialpad) findViewById(R.id.nine_key_dialpad);
         insertDatabase();
     }
 
@@ -53,6 +64,10 @@ public class MainActivity extends BaseActivity {
             }
             mDrawerToggle.syncState();
         }
+
+        mRecyclerView.setAdapter(new ContactsAdapter(this, getData()));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+
         mNavigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -60,6 +75,17 @@ public class MainActivity extends BaseActivity {
                 return onOptionsItemSelected(item);
             }
         });
+    }
+
+    private List<User> getData() {
+        List<User> users = new ArrayList<>();
+        users.add(new User("张杰", "18819475888"));
+        users.add(new User("张树悦", "18819475110"));
+        users.add(new User("周杰伦", "18819475444"));
+        users.add(new User("张嘉伟", "18819577145"));
+        users.add(new User("涨你妹", "18813465813"));
+        users.add(new User("龙应台", "18137321351"));
+        return users;
     }
 
     private void insertDatabase()

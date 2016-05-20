@@ -4,10 +4,9 @@
     <item
         android:id="@+id/action_classified_query"
         android:title="@string/classified_query"
-        app:showAsAction="withText"/>
+        app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/action_logout"
         android:title="@string/logout"
         app:showAsAction="never"/>
-
 </menu>

@@ -7,12 +7,12 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     >
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"/>
     <com.fivefire.app.gdutcontacts.widget.dialpad.NineKeyDialpad
+        android:id="@+id/nine_key_dialpad"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-    <Button
-        android:id="@+id/Search"
-        android:text="@string/classified_query"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 </LinearLayout>
