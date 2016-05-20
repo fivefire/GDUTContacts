@@ -65,14 +65,8 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/btn_select"
+            android:elevation="4dp"
             android:text="@string/SignIn" />
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="sss"
-
-            />
 
         <LinearLayout
             android:layout_width="fill_parent"
