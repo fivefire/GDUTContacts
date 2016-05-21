@@ -1,6 +1,11 @@
 package com.fivefire.app.gdutcontacts.widget.dialpad;
 
 import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.support.v4.content.res.ResourcesCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
 import android.util.AttributeSet;
@@ -50,6 +55,8 @@ public class NineKeyDialpad extends FrameLayout implements INineKeyDialpad, View
 
     private RecyclerView mRecyclerView;
 
+    private int mTintColor;
+
     public NineKeyDialpad(Context context) {
         this(context, null);
     }
@@ -62,15 +69,51 @@ public class NineKeyDialpad extends FrameLayout implements INineKeyDialpad, View
         super(context, attrs, defStyleAttr);
 
         LayoutInflater.from(context).inflate(R.layout.layout_ninekey_dialpad, this, true);
-
+        handleAttrs(attrs);
         mNineKeyButtons = new ArrayList<>();
 
         initView();
 
         setupListener();
+    }
 
-        InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(mSearchView.getWindowToken(), 0);
+    private void handleAttrs(AttributeSet attrs) {
+        TypedArray array = getContext().obtainStyledAttributes(attrs, R.styleable.NineKeyDialpad);
+        mTintColor = array.getColor(R.styleable.NineKeyDialpad_tint_color, Color.BLACK);
+
+        Drawable callIcon = array.getDrawable(R.styleable.NineKeyDialpad_call_icon);
+        if (callIcon == null) {
+            callIcon = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_phone_black_24dp, null);
+        }
+        ImageButton callButton = (ImageButton) findViewById(R.id.bt_call);
+        callButton.setImageDrawable(tintColor(callIcon, Color.WHITE));
+
+        Drawable msgIcon = array.getDrawable(R.styleable.NineKeyDialpad_msg_icon);
+        if (msgIcon == null) {
+            msgIcon = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_message_black_24dp, null);
+        }
+        ImageButton msgButton = (ImageButton) findViewById(R.id.bt_send_msg);
+        msgButton.setImageDrawable(tintColor(msgIcon));
+
+        Drawable hideIcon = array.getDrawable(R.styleable.NineKeyDialpad_hide_icon);
+        if (hideIcon == null) {
+            hideIcon = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_arrow_downward_black_24dp, null);
+        }
+        ImageButton hideButton = (ImageButton) findViewById(R.id.bt_hide);
+        hideButton.setImageDrawable(tintColor(hideIcon));
+
+        array.recycle();
+    }
+
+    private Drawable tintColor(Drawable icon) {
+        return tintColor(icon, mTintColor);
+    }
+
+
+    private Drawable tintColor(Drawable icon, int color) {
+        Drawable result = DrawableCompat.wrap(icon);
+        DrawableCompat.setTint(result, color);
+        return result;
     }
 
     private void initView() {
@@ -99,10 +142,18 @@ public class NineKeyDialpad extends FrameLayout implements INineKeyDialpad, View
                 View view = row.getChildAt(j);
                 if (view instanceof NineKeyButton) {
                     mNineKeyButtons.add((INineKeyButton) view);
+                    styleNineKeyButton((Button) view);
                 }
             }
         }
     }
+
+    private void styleNineKeyButton(Button button) {
+        if (button != null) {
+            button.setTextColor(mTintColor);
+        }
+    }
+
 
     public OnQueryTextListener getOnQueryTextListener() {
         return mOnQueryTextListener;

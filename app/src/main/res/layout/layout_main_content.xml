@@ -18,5 +18,9 @@
         android:layout_gravity="bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:call_icon="@drawable/ic_phone_black_24dp"
+        app:msg_icon="@drawable/ic_message_black_24dp"
+        app:hide_icon="@drawable/ic_arrow_downward_black_24dp"
+        app:tint_color="@color/accent"
         />
 </LinearLayout>

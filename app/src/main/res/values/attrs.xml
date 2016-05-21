@@ -5,6 +5,12 @@
         <attr name="keywords" format="string"/>
         <attr name="number" format="string" />
     </declare-styleable>
+    <declare-styleable name="NineKeyDialpad">
+        <attr name="call_icon" format="reference" />
+        <attr name="msg_icon" format="reference" />
+        <attr name="hide_icon" format="reference" />
+        <attr name="tint_color" format="color" />
+    </declare-styleable>
     <declare-styleable name="DeletableEditText">
         <attr name="clean_icon" format="reference"/>
     </declare-styleable>
