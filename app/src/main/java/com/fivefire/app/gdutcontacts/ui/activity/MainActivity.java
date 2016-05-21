@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -22,6 +23,7 @@ import com.fivefire.app.gdutcontacts.model.User;
 import com.fivefire.app.gdutcontacts.ui.common.BaseActivity;
 import com.fivefire.app.gdutcontacts.widget.dialpad.NineKeyDialpad;
 import com.fivefire.app.gdutcontacts.widget.dialpad.OnQueryTextListener;
+import com.fivefire.app.gdutcontacts.widget.dialpad.animation.OnAnimationListenerAdapter;
 import com.fivefire.app.gdutcontacts.widget.dialpad.query.IQuery;
 
 import java.io.File;
@@ -44,6 +46,9 @@ public class MainActivity extends BaseActivity implements OnQueryTextListener{
     private List<User> mUserList;
     private ContactsAdapter mAdapter;//Rv的Adapter
 
+    private FloatingActionButton mShowButton;
+
+
     @Override
     protected void initView() {
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -54,6 +59,7 @@ public class MainActivity extends BaseActivity implements OnQueryTextListener{
         mNavigationView = (NavigationView) findViewById(R.id.navigation_view);
         mRecyclerView = (RecyclerView) findViewById(R.id.rv);
         mNineKeyDialpad = (NineKeyDialpad) findViewById(R.id.nine_key_dialpad);
+        mShowButton = (FloatingActionButton) findViewById(R.id.bt_show);
         insertDatabase();
     }
 
@@ -76,6 +82,22 @@ public class MainActivity extends BaseActivity implements OnQueryTextListener{
 
         mNineKeyDialpad.setRecyclerView(mRecyclerView);
         mNineKeyDialpad.setOnQueryTextListener(this);
+        mNineKeyDialpad.setOnAnimationListener(new OnAnimationListenerAdapter() {
+            @Override
+            public void onAnimationFinish(boolean isShown) {
+                if (!isShown)
+                    mShowButton.show();
+            }
+        });
+
+        mShowButton.hide();
+        mShowButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mNineKeyDialpad.show();
+                mShowButton.hide();
+            }
+        });
 
         mNavigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
@@ -200,4 +222,6 @@ public class MainActivity extends BaseActivity implements OnQueryTextListener{
     public IQuery getQuery() {
         return mQuery;
     }
+
+
 }

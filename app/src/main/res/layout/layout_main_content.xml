@@ -1,26 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     >
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv"
-        android:layout_weight="1"
+    <android.support.design.widget.FloatingActionButton
+        android:visibility="invisible"
+        android:id="@+id/bt_show"
+        android:src="@drawable/ic_expand_less_white_36dp"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/spacing_more_large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        />
-    <com.fivefire.app.gdutcontacts.widget.dialpad.NineKeyDialpad
-        android:id="@+id/nine_key_dialpad"
-        android:layout_gravity="bottom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:call_icon="@drawable/ic_phone_black_24dp"
-        app:msg_icon="@drawable/ic_message_black_24dp"
-        app:hide_icon="@drawable/ic_arrow_downward_black_24dp"
-        app:tint_color="@color/accent"
-        />
-</LinearLayout>
+        android:layout_height="match_parent">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            />
+        <com.fivefire.app.gdutcontacts.widget.dialpad.NineKeyDialpad
+            android:id="@+id/nine_key_dialpad"
+            android:layout_gravity="bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:call_icon="@drawable/ic_phone_black_24dp"
+            app:msg_icon="@drawable/ic_message_black_24dp"
+            app:hide_icon="@drawable/ic_expand_more_black_24dp"
+            app:tint_color="@color/accent"
+            />
+    </LinearLayout>
+</FrameLayout>

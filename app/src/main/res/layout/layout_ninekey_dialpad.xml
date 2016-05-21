@@ -152,7 +152,7 @@
         <ImageButton
             android:contentDescription="@string/hide"
             android:id="@+id/bt_hide"
-            android:src="@drawable/ic_arrow_downward_black_24dp"
+            android:src="@drawable/ic_expand_more_black_24dp"
             android:scaleType="center"
             android:background="@drawable/bg_ripple_dark"
             android:layout_gravity="end"
