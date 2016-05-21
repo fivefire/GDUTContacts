@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.fivefire.app.gdutcontacts.R;
 import com.fivefire.app.gdutcontacts.ui.common.ClearEditText;
+import com.fivefire.app.gdutcontacts.utils.CheckInfo;
 
 public class LoginActivity extends Activity {
     private ClearEditText loginUser,loginPassword;
@@ -50,6 +51,23 @@ public class LoginActivity extends Activity {
         public void onClick(View view) {
             switch (view.getId()){
                 case R.id.signIn :
+                    String account = loginUser.getText().toString();
+                    String password = loginPassword.getText().toString();
+                    if (CheckInfo.isNetworkAvailable(LoginActivity.this)){
+
+                        if (!account.equals("")&&!password.equals("")){
+                            if (CheckInfo.isMobile(account)){
+                                //send the account and password and check it
+                            }else{
+                                Toast.makeText(LoginActivity.this,"账号不正确",Toast.LENGTH_SHORT).show();
+                            }
+                        }else{
+                            Toast.makeText(LoginActivity.this,"请填写账号信息",Toast.LENGTH_SHORT).show();
+                        }
+
+                    }else {
+                        Toast.makeText(LoginActivity.this,"当前网络不可用",Toast.LENGTH_SHORT).show();
+                    }
                     Intent intent = new Intent();
                     intent.setClass(LoginActivity.this,MainActivity.class);
                     startActivity(intent);

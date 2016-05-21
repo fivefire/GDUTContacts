@@ -1,5 +1,6 @@
 package com.fivefire.app.gdutcontacts.ui.activity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -71,13 +72,24 @@ public class RegisterActivity extends AppCompatActivity {
                 tag = 0;
             }
             if(tag==1)
-            new AlertDialog.Builder(RegisterActivity.this)
-                    .setTitle("注册")
-                    .setMessage("电话："+mobile+"\n"+"学号："+sno+"\n"+"姓名："+name)
-                    .setNegativeButton("取消",null)
-                    .setPositiveButton("确定",null)
-                    .create()
-                    .show();
+                if(CheckInfo.isNetworkAvailable(RegisterActivity.this)) {
+                    new AlertDialog.Builder(RegisterActivity.this)
+                            .setTitle("注册")
+                            .setMessage("电话：" + mobile + "\n" + "学号：" + sno + "\n" + "姓名：" + name)
+                            .setNegativeButton("取消", null)
+                            .setPositiveButton("确定",new EnsureAction())
+                            .create()
+                            .show();
+                }else {
+                    Toast.makeText(RegisterActivity.this,"当前网络不可用",Toast.LENGTH_SHORT).show();
+                }
+        }
+    }
+
+    class EnsureAction implements DialogInterface.OnClickListener{
+        @Override
+        public void onClick(DialogInterface dialogInterface, int i) {
+            Toast.makeText(RegisterActivity.this,"数据发送",Toast.LENGTH_SHORT).show();
         }
     }
 

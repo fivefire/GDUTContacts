@@ -1,5 +1,9 @@
 package com.fivefire.app.gdutcontacts.utils;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,5 +29,19 @@ public class CheckInfo {
             return true;
         else
             return false;
+    }
+
+    public static boolean isNetworkAvailable(Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager)
+                context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager != null) {
+            NetworkInfo info = connectivityManager.getActiveNetworkInfo();
+            if (info != null && info.isConnected()) {
+                if (info.getState() == NetworkInfo.State.CONNECTED) {
+                    return true;
+                }
+            }
+        }
+        return  false;
     }
 }
