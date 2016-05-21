@@ -1,5 +1,7 @@
 package com.fivefire.app.gdutcontacts.model;
 
+import com.fivefire.app.gdutcontacts.widget.dialpad.query.IUser;
+
 import java.io.Serializable;
 
 import cn.bmob.v3.BmobObject;
@@ -7,7 +9,7 @@ import cn.bmob.v3.BmobObject;
 /**
  * Created by djd14 on 2016/5/12.
  */
-public class User extends BmobObject implements Serializable{
+public class User extends BmobObject implements Serializable, IUser {
     String Phone;
     String Sphone;
     String Name;
@@ -18,12 +20,19 @@ public class User extends BmobObject implements Serializable{
     Number Tag;
     String Aname;
     String Note;
-    public User(){
+
+    public User(String name, String phone) {
+        Phone = phone;
+        Name = name;
+    }
+
+    public User() {
 
     }
+
     public User(String tableName, String note, String aname, String dno, Number tag, String password, Number grade, String sno, String name, String sphone, String phone) {
         super(tableName);//the  user class ,the same the table
-       this.setTableName("User");
+        this.setTableName("User");
         Note = note;
         Aname = aname;
         Dno = dno;

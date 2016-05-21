@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.fivefire.app.gdutcontacts.R;
-import com.fivefire.app.gdutcontacts.User;
+import com.fivefire.app.gdutcontacts.model.User;
 
 import java.util.List;
 

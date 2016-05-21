@@ -17,10 +17,12 @@ import android.view.View;
 import android.widget.Button;
 
 import com.fivefire.app.gdutcontacts.R;
-import com.fivefire.app.gdutcontacts.User;
 import com.fivefire.app.gdutcontacts.adapter.ContactsAdapter;
+import com.fivefire.app.gdutcontacts.model.User;
 import com.fivefire.app.gdutcontacts.ui.common.BaseActivity;
 import com.fivefire.app.gdutcontacts.widget.dialpad.NineKeyDialpad;
+import com.fivefire.app.gdutcontacts.widget.dialpad.OnQueryTextListener;
+import com.fivefire.app.gdutcontacts.widget.dialpad.query.IQuery;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -30,7 +32,7 @@ import java.util.List;
 
 import cn.bmob.v3.Bmob;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements OnQueryTextListener{
     private static final String TAG = "MainActivity";
     private Toolbar mToolbar;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -38,6 +40,9 @@ public class MainActivity extends BaseActivity {
     private NavigationView mNavigationView;
     private RecyclerView mRecyclerView;
     private NineKeyDialpad mNineKeyDialpad;
+    private IQuery mQuery;//查询器
+    private List<User> mUserList;
+    private ContactsAdapter mAdapter;//Rv的Adapter
 
     @Override
     protected void initView() {
@@ -64,9 +69,13 @@ public class MainActivity extends BaseActivity {
             }
             mDrawerToggle.syncState();
         }
-
-        mRecyclerView.setAdapter(new ContactsAdapter(this, getData()));
+        mUserList = getData();
+        mAdapter = new ContactsAdapter(this, new ArrayList<>(mUserList));
+        mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+
+        mNineKeyDialpad.setRecyclerView(mRecyclerView);
+        mNineKeyDialpad.setOnQueryTextListener(this);
 
         mNavigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
@@ -170,5 +179,25 @@ public class MainActivity extends BaseActivity {
     @Override
     protected int getContentViewId() {
         return R.layout.activity_main;
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public void onQueryTextChange(String newText) {
+        List<User> users = (List<User>) mQuery.filter(mUserList, newText);
+        for (User user : users) {
+            Log.d(TAG, user.getName() + user.getPhone() + newText);
+        }
+        mAdapter.animateTo(users);
+    }
+
+    @Override
+    public void setQuery(IQuery query) {
+        mQuery = query;
+    }
+
+    @Override
+    public IQuery getQuery() {
+        return mQuery;
     }
 }

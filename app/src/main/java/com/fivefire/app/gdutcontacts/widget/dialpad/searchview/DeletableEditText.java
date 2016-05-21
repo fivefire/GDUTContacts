@@ -15,6 +15,7 @@ import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
@@ -22,13 +23,14 @@ import android.widget.EditText;
 
 import com.fivefire.app.gdutcontacts.R;
 import com.fivefire.app.gdutcontacts.utils.DensityUtil;
+import com.fivefire.app.gdutcontacts.widget.dialpad.OnQueryTextListener;
 
 /**
+ * 一个带有删除键的EditText
  * Created by MicroStudent on 2016/5/19.
  */
 public class DeletableEditText extends EditText implements View.OnFocusChangeListener, TextWatcher {
 
-    private int mClearIconId;
     private Drawable mClearIcon;
     private int mClearIconSize;
     private int mIconLeftX;
@@ -36,7 +38,7 @@ public class DeletableEditText extends EditText implements View.OnFocusChangeLis
     private boolean isClearIconVisible = true;
     private boolean isTouch = false;
     private Resources mResources;
-
+    private OnQueryTextListener mOnQueryTextListener;
 
     public DeletableEditText(Context context) {
         this(context, null);
@@ -146,6 +148,11 @@ public class DeletableEditText extends EditText implements View.OnFocusChangeLis
     public void onTextChanged(CharSequence text, int start, int lengthBefore, int lengthAfter) {
         super.onTextChanged(text, start, lengthBefore, lengthAfter);
         setIsClearIconVisible(getText().length() > 0);
+        Log.d("test", "Deleteable text is changing");
+
+        if (mOnQueryTextListener != null) {
+            mOnQueryTextListener.onQueryTextChange(text.toString());
+        }
     }
 
     @Override
@@ -168,5 +175,7 @@ public class DeletableEditText extends EditText implements View.OnFocusChangeLis
 
     }
 
-
+    public void setOnQueryTextListener(OnQueryTextListener mOnQueryTextListener) {
+        this.mOnQueryTextListener = mOnQueryTextListener;
+    }
 }

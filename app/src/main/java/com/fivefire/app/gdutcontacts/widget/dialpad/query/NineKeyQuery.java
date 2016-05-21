@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
+ * 一个根据输入的电话号码来筛选的查询器
  * Created by MicroStudent on 2016/5/19.
  */
 public class NineKeyQuery implements IQuery {
@@ -20,6 +21,9 @@ public class NineKeyQuery implements IQuery {
 
     @Override
     public List<? extends IUser> filter(List<? extends IUser> data, String queryString) {
+        if (queryString.isEmpty()) {
+            return data;
+        }
         result.clear();
         result.addAll(queryByNumber(data, queryString));
         result.addAll(queryByName(data, queryString));
@@ -27,6 +31,7 @@ public class NineKeyQuery implements IQuery {
     }
 
     private List<IUser> queryByName(List<? extends IUser> data, String queryString) {
+        filteredModelListByName.clear();
         for(int i = 0; i < data.size();i++){
             //取出拼音
             String[] pinyin = PinyinUtils.getPinyinString(data.get(i).getName());
@@ -83,9 +88,9 @@ public class NineKeyQuery implements IQuery {
 
     private List<IUser> queryByNumber(List<? extends IUser> data, String queryString) {
         filteredModelListByNumber.clear();
-        for (IUser object : data) {
-            if (object.toString().contains(queryString)) {
-                filteredModelListByNumber.add(object);
+        for (IUser user : data) {
+            if (user.getPhone().contains(queryString)) {
+                filteredModelListByNumber.add(user);
             }
         }
         return filteredModelListByNumber;

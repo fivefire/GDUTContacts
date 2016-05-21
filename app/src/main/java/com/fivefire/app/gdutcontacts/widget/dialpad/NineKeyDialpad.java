@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
@@ -20,12 +21,14 @@ import com.fivefire.app.gdutcontacts.R;
 import com.fivefire.app.gdutcontacts.widget.dialpad.ninekeybutton.INineKeyButton;
 import com.fivefire.app.gdutcontacts.widget.dialpad.ninekeybutton.NineKeyButton;
 import com.fivefire.app.gdutcontacts.widget.dialpad.query.IQuery;
+import com.fivefire.app.gdutcontacts.widget.dialpad.query.NineKeyQuery;
 import com.fivefire.app.gdutcontacts.widget.dialpad.searchview.DeletableEditText;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 一个九键拨号键盘
  * Created by MicroStudent on 2016/5/19.
  */
 public class NineKeyDialpad extends FrameLayout implements INineKeyDialpad, View.OnClickListener {
@@ -65,6 +68,9 @@ public class NineKeyDialpad extends FrameLayout implements INineKeyDialpad, View
         initView();
 
         setupListener();
+
+        InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(mSearchView.getWindowToken(), 0);
     }
 
     private void initView() {
@@ -104,13 +110,11 @@ public class NineKeyDialpad extends FrameLayout implements INineKeyDialpad, View
 
     public void setOnQueryTextListener(OnQueryTextListener mOnQueryTextListener) {
         this.mOnQueryTextListener = mOnQueryTextListener;
+
+        mSearchView.setOnQueryTextListener(mOnQueryTextListener);
+
         if (mOnQueryTextListener.getQuery() == null) {
-            mOnQueryTextListener.setQuery(new IQuery() {
-                @Override
-                public List filter(List data, String queryString) {
-                    return null;
-                }
-            });
+            mOnQueryTextListener.setQuery(new NineKeyQuery());
         }
     }
 
@@ -155,7 +159,6 @@ public class NineKeyDialpad extends FrameLayout implements INineKeyDialpad, View
 
     private void handleNineKeyButtonOnClick(INineKeyButton button) {
         mSearchView.insertByCursor(button.getNumber());
-
         if (mOnQueryTextListener != null) {
             mOnQueryTextListener.onQueryTextChange(mSearchView.getText().toString());
         }

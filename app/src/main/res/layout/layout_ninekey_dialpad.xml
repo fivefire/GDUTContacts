@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
     <com.fivefire.app.gdutcontacts.widget.dialpad.searchview.DeletableEditText
         android:id="@+id/et"
         android:layout_margin="@dimen/spacing_normal"
@@ -12,14 +12,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="@dimen/font_larger"
-        android:inputType="phone"
+        android:inputType="none"
+        android:textIsSelectable="true"
         app:clean_icon="@drawable/ic_backspace_black_24dp"
         />
     <TableLayout
         android:id="@+id/container"
         android:stretchColumns="0,1,2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:padding="@dimen/spacing_normal"
         >
         <TableRow
