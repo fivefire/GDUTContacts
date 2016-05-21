@@ -17,6 +17,9 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -102,6 +105,8 @@ public class NineKeyDialpad extends FrameLayout implements INineKeyDialpad, View
                 requestLayout();
             }
         });
+        mDropAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
+        mDropAnimator.setDuration(500);
         mDropAnimator.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationStart(Animator animation) {
