@@ -1,12 +1,17 @@
 package com.fivefire.app.gdutcontacts.widget.dialpad;
 
+import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.RecyclerView;
@@ -29,6 +34,7 @@ import android.widget.TableRow;
 import android.widget.Toast;
 
 import com.fivefire.app.gdutcontacts.R;
+import com.fivefire.app.gdutcontacts.adapter.ContactsAdapter;
 import com.fivefire.app.gdutcontacts.widget.dialpad.animation.OnAnimationListener;
 import com.fivefire.app.gdutcontacts.widget.dialpad.ninekeybutton.INineKeyButton;
 import com.fivefire.app.gdutcontacts.widget.dialpad.ninekeybutton.NineKeyButton;
@@ -181,7 +187,7 @@ public class NineKeyDialpad extends FrameLayout implements INineKeyDialpad, View
         int count = mContainer.getChildCount();
         for (int i = 0; i < count; i++) {
             TableRow row = (TableRow) mContainer.getChildAt(i);
-            for (int j = 0;j<3;j++) {
+            for (int j = 0; j < 3; j++) {
                 View view = row.getChildAt(j);
                 if (view instanceof NineKeyButton) {
                     mNineKeyButtons.add((INineKeyButton) view);
@@ -233,6 +239,7 @@ public class NineKeyDialpad extends FrameLayout implements INineKeyDialpad, View
     @Override
     public void setRecyclerView(RecyclerView recyclerView) {
         this.mRecyclerView = recyclerView;
+
     }
 
     @Override
@@ -243,16 +250,33 @@ public class NineKeyDialpad extends FrameLayout implements INineKeyDialpad, View
     }
 
     @Override
+    public void setQueryText(String queryText) {
+        mSearchView.setText(queryText);
+    }
+
+    @Override
     public void onClick(View v) {
         if (v instanceof INineKeyButton) {
-            handleNineKeyButtonOnClick((INineKeyButton)v);
+            handleNineKeyButtonOnClick((INineKeyButton) v);
             return;
         }
         switch (v.getId()) {
             case R.id.bt_call:
-                Toast.makeText(getContext(), "test", Toast.LENGTH_LONG).show();
+                String uri = "tel:" + mSearchView.getText().toString();
+                Intent intent = new Intent(Intent.ACTION_CALL);
+                intent.setData(Uri.parse(uri));
+                if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.CALL_PHONE)
+                        != PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(getContext(), "权限不足", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                getContext().startActivity(intent);
                 break;
             case R.id.bt_send_msg:
+                uri = "sms:" + mSearchView.getText().toString();
+                intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(uri));
+                getContext().startActivity(intent);
                 break;
             case R.id.bt_hide:
                 hide();
