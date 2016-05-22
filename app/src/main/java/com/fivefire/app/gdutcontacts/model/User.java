@@ -17,7 +17,7 @@ public class User extends BmobObject implements Serializable, IUser {
     Number Grade;
     String Password;
     String Dno;
-    Number Tag;
+    Number Tag;//1 is admin 2 is common user whitch has velify  ,3 is not;
     String Aname;
     String Note;
 

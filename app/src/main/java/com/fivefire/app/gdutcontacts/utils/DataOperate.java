@@ -3,7 +3,7 @@ package com.fivefire.app.gdutcontacts.utils;
 import android.content.Context;
 import android.widget.Toast;
 
-import com.fivefire.app.gdutcontacts.User;
+import com.fivefire.app.gdutcontacts.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +32,7 @@ public class DataOperate {
 
                 @Override
                 public void onFailure(int i, String s) {
-                     Toast.makeText(context,"add the user data fail!",Toast.LENGTH_SHORT).show();
+                     Toast.makeText(context,"add the user data fail:"+s,Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -96,13 +96,42 @@ public class DataOperate {
        user.delete(context, new DeleteListener() {
            @Override
            public void onSuccess() {
-              Toast.makeText(context,"delete successfully",Toast.LENGTH_SHORT).show();
+               Toast.makeText(context, "delete successfully", Toast.LENGTH_SHORT).show();
            }
 
            @Override
            public void onFailure(int i, String s) {
-               Toast.makeText(context,"delete fail:"+s,Toast.LENGTH_SHORT).show();
+               Toast.makeText(context, "delete fail:" + s, Toast.LENGTH_SHORT).show();
            }
        });
    }
+
+    public boolean login(final Context context,String phone,String password){
+         final   boolean [] isexit=new boolean[1];
+        BmobQuery<com.fivefire.app.gdutcontacts.model.User> queryphone=new BmobQuery<>();
+        queryphone.addWhereEqualTo("Phone",phone);
+        BmobQuery<User> querypassword=new BmobQuery<>();
+        querypassword.addWhereEqualTo("Password", password);
+        BmobQuery<User> querytag=new BmobQuery<>();
+        querytag.addWhereNotEqualTo("Tag", 3);
+        List<BmobQuery<User>> list=new ArrayList<>();
+        list.add(querypassword);
+        list.add(queryphone);
+        list.add(querytag);
+        BmobQuery<User> querylist=new BmobQuery<>();
+        querylist.and(list);
+        querylist.findObjects(context, new FindListener<User>() {
+            @Override
+            public void onSuccess(List<User> list) {
+                isexit[0]=true;
+            }
+
+            @Override
+            public void onError(int i, String s) {
+                isexit[0]=false;
+                Toast.makeText(context,"error code:"+i+"message:"+s,Toast.LENGTH_SHORT).show();
+            }
+        });
+        return  isexit[0];
+    }
 }
