@@ -94,6 +94,7 @@ public class MainActivity extends BaseActivity implements OnQueryTextListener{
         mShowButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d(TAG, "float button on click!");
                 mNineKeyDialpad.show();
                 mShowButton.hide();
             }
