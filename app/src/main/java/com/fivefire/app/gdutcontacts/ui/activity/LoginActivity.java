@@ -13,6 +13,9 @@ import android.widget.Toast;
 import com.fivefire.app.gdutcontacts.R;
 import com.fivefire.app.gdutcontacts.ui.common.ClearEditText;
 import com.fivefire.app.gdutcontacts.utils.CheckInfo;
+import com.fivefire.app.gdutcontacts.utils.DataOperate;
+
+import cn.bmob.v3.Bmob;
 
 public class LoginActivity extends Activity {
     private ClearEditText loginUser,loginPassword;
@@ -21,7 +24,7 @@ public class LoginActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        Bmob.initialize(LoginActivity.this,"58d2bb059cc1244e252cea21b4313d0c");
         init();
 
     }
@@ -57,7 +60,15 @@ public class LoginActivity extends Activity {
 
                         if (!account.equals("")&&!password.equals("")){
                             if (CheckInfo.isMobile(account)){
-                                //send the account and password and check it
+                                DataOperate dataOperate = new DataOperate();
+                                boolean isExist = dataOperate.login(LoginActivity.this,account,password);
+                                if(isExist){ //if account and password is right then go to the MainActivity
+                                    Intent intent = new Intent();
+                                    intent.setClass(LoginActivity.this,MainActivity.class);
+                                    startActivity(intent);
+                                }else{
+                                    Toast.makeText(LoginActivity.this,"账户或密码不正确",Toast.LENGTH_SHORT).show();
+                                }
                             }else{
                                 Toast.makeText(LoginActivity.this,"账号不正确",Toast.LENGTH_SHORT).show();
                             }
@@ -68,9 +79,6 @@ public class LoginActivity extends Activity {
                     }else {
                         Toast.makeText(LoginActivity.this,"当前网络不可用",Toast.LENGTH_SHORT).show();
                     }
-                    Intent intent = new Intent();
-                    intent.setClass(LoginActivity.this,MainActivity.class);
-                    startActivity(intent);
                     break;
                 case R.id.login_forgot_pass:
                     Intent intent1 = new Intent();
