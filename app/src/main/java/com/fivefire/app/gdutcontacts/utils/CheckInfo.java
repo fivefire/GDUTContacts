@@ -44,4 +44,26 @@ public class CheckInfo {
         }
         return  false;
     }
+
+    /**
+     * 修改密码时，判断两次输入的密码是否一致
+     */
+
+    public static boolean confirmPassword(String new_password,String confirm_password){
+        if(new_password.equals(confirm_password)){
+            return true;
+        }
+        else{
+            return false;
+        }
+
+    }
+
+    /**
+     * 修改密码时，判断旧密码是否正确
+     */
+
+    public static boolean confirmOldPassword(String old_password){
+        return false;
+    }
 }

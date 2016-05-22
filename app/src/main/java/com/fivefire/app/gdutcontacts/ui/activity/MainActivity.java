@@ -168,15 +168,18 @@ public class MainActivity extends BaseActivity implements OnQueryTextListener {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent;
         if (mDrawerToggle.onOptionsItemSelected(item)){
             return true;
         }
         Log.d(TAG, "onOpinionSelected");
         switch (item.getItemId()){
             case R.id.nav_change_password:
+                intent=new Intent(this,ChangePasswordActivity.class);
+                startActivity(intent);
                 break;
             case R.id.nav_verify:
-                Intent intent = new Intent(this, VerifyActivity.class);
+                intent = new Intent(this, VerifyActivity.class);
                 startActivity(intent);
                 break;
             case R.id.nav_about:
