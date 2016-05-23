@@ -141,4 +141,22 @@ public class DataOperate {
         Log.d("66666666","555555555"+isexit[0]);
         return  isexit[0]==false;
     }
+    public User quenryEqual(Context context,String key,String value){
+        final User[] user = new User[1];
+        BmobQuery<User> query=new BmobQuery<>();
+        query.addWhereEqualTo(key,value);
+        query.findObjects(context, new FindListener<User>() {
+            @Override
+            public void onSuccess(List<User> list) {
+                user[0] =list.get(0);
+            }
+
+            @Override
+            public void onError(int i, String s) {
+
+            }
+        });
+        return user[0];
+    }
+
 }
