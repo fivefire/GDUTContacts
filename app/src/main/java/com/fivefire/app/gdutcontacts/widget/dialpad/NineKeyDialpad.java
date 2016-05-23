@@ -15,17 +15,10 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.RecyclerView;
-import android.text.InputType;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.DecelerateInterpolator;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
@@ -34,7 +27,6 @@ import android.widget.TableRow;
 import android.widget.Toast;
 
 import com.fivefire.app.gdutcontacts.R;
-import com.fivefire.app.gdutcontacts.adapter.ContactsAdapter;
 import com.fivefire.app.gdutcontacts.widget.dialpad.animation.OnAnimationListener;
 import com.fivefire.app.gdutcontacts.widget.dialpad.ninekeybutton.INineKeyButton;
 import com.fivefire.app.gdutcontacts.widget.dialpad.ninekeybutton.NineKeyButton;
@@ -52,7 +44,7 @@ import java.util.List;
 public class NineKeyDialpad extends FrameLayout implements INineKeyDialpad, View.OnClickListener {
 
     private static final String TAG = "NineKeyDialpad";
-    private List<INineKeyButton> mNineKeyButtons;
+    private final List<INineKeyButton> mNineKeyButtons;
 
     private DeletableEditText mSearchView;
 
