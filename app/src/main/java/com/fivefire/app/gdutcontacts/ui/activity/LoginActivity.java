@@ -63,7 +63,7 @@ public class LoginActivity extends Activity {
             switch (msg.what){
                 case 1 :
                     User user = (User) msg.obj;
-                    if(user.getPassword().equals(password)&&user.getTag()!=3) {
+                    if(user.getPassword().equals(password)&&user.getTag().intValue()!=3) {
                         Intent intent = new Intent();
                         intent.setClass(LoginActivity.this,MainActivity.class);
                         startActivity(intent);
@@ -97,7 +97,7 @@ public class LoginActivity extends Activity {
                                 query.findObjects(LoginActivity.this, new FindListener<User>() {
                                     @Override
                                     public void onSuccess(List<User> list) {
-                                        if(list.get(0).getPassword().equals(password)&&list.get(0).getTag()!=3){
+                                        if(!list.isEmpty()&&list.get(0).getPassword().equals(password)&&list.get(0).getTag().intValue()!=3){
                                             Message message = new Message();
                                             message.what = 1;
                                             message.obj = list.get(0);
@@ -105,8 +105,6 @@ public class LoginActivity extends Activity {
                                         }else {
                                             Toast.makeText(LoginActivity.this,"账号不正确",Toast.LENGTH_SHORT).show();
                                         }
-
-
                                     }
 
                                     @Override
