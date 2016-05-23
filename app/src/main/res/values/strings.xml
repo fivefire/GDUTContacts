@@ -50,6 +50,12 @@
     <string name="title_activity_register">RegisterActivity</string>
     <string name="classified_query">分类查找</string>
     <string name="account_circle">联系人列表头像</string>
-    <string name="see_more">查看详情</string>
+    <string name="see_more">详情</string>
+    <string name="ensure">确定</string>
+    <string name="title_activity_change_password">ChangePasswordActivity</string>
+    <string name="old_password">旧密码</string>
+    <string name="new_password">新密码</string>
+    <string name="confirm_password">确认密码</string>
+    <string name="confirm">确认</string>
 
 </resources>

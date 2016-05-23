@@ -1,6 +1,7 @@
 package com.fivefire.app.gdutcontacts.utils;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.fivefire.app.gdutcontacts.model.User;
@@ -120,19 +121,25 @@ public class DataOperate {
         list.add(querytag);
         BmobQuery<User> querylist=new BmobQuery<>();
         querylist.and(list);
+        Log.d("66666666","666666666");
         querylist.findObjects(context, new FindListener<User>() {
             @Override
             public void onSuccess(List<User> list) {
+                Log.d("66666666","999999999");
                 isexit[0]=true;
+                Log.d("66666666","999999999"+isexit[0]);
+
             }
 
             @Override
             public void onError(int i, String s) {
-                isexit[0]=false;
+                Log.d("66666666","22222222222222");
+               // isexit[0]=false;
                 Toast.makeText(context,"error code:"+i+"message:"+s,Toast.LENGTH_SHORT).show();
             }
         });
-        return  isexit[0];
+        Log.d("66666666","555555555"+isexit[0]);
+        return  isexit[0]==false;
     }
     public User quenryEqual(Context context,String key,String value){
         final User[] user = new User[1];

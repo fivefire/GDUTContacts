@@ -30,4 +30,10 @@ public interface INineKeyDialpad {
      * @param query
      */
     void setQuery(IQuery query);
+
+    /**
+     * 设置显示在SearchView上的text，即查询条件
+     * @param queryText 查询语句，必须是电话号码
+     */
+    void setQueryText(String queryText);
 }

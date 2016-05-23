@@ -11,13 +11,24 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.fivefire.app.gdutcontacts.R;
+import com.fivefire.app.gdutcontacts.model.User;
 import com.fivefire.app.gdutcontacts.ui.common.ClearEditText;
 import com.fivefire.app.gdutcontacts.utils.CheckInfo;
+import com.fivefire.app.gdutcontacts.utils.DataOperate;
+
+import cn.bmob.v3.Bmob;
 
 
 public class RegisterActivity extends AppCompatActivity {
     private ClearEditText edt_pho,edt_sno,edt_name,edt_password1,edt_password2;
     private Button btn_register;
+    private User user;
+    private String mobile;
+    private String sno;
+    private String name;
+    private String password1;
+    private String password2;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +38,7 @@ public class RegisterActivity extends AppCompatActivity {
         toolbar.setTitle("注册");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        Bmob.initialize(RegisterActivity.this,"58d2bb059cc1244e252cea21b4313d0c");
         init();
 
 
@@ -47,11 +58,11 @@ public class RegisterActivity extends AppCompatActivity {
 
         @Override
         public void onClick(View view) {
-            String mobile = edt_pho.getText().toString();
-            String sno = edt_sno.getText().toString();
-            String name = edt_name.getText().toString();
-            String password1 = edt_password1.getText().toString();
-            String password2 = edt_password2.getText().toString();
+            mobile = edt_pho.getText().toString();
+            sno = edt_sno.getText().toString();
+            name = edt_name.getText().toString();
+            password1 = edt_password1.getText().toString();
+            password2 = edt_password2.getText().toString();
 
             int tag = 1;
             if(!CheckInfo.isMobile(mobile)){
@@ -74,7 +85,7 @@ public class RegisterActivity extends AppCompatActivity {
             if(tag==1)
                 if(CheckInfo.isNetworkAvailable(RegisterActivity.this)) {
                     new AlertDialog.Builder(RegisterActivity.this)
-                            .setTitle("注册")
+                            .setTitle("信息确认")
                             .setMessage("电话：" + mobile + "\n" + "学号：" + sno + "\n" + "姓名：" + name)
                             .setNegativeButton("取消", null)
                             .setPositiveButton("确定",new EnsureAction())
@@ -89,6 +100,14 @@ public class RegisterActivity extends AppCompatActivity {
     class EnsureAction implements DialogInterface.OnClickListener{
         @Override
         public void onClick(DialogInterface dialogInterface, int i) {
+            user = new User();
+            user.setPhone(mobile);
+            user.setSno(sno);
+            user.setName(name);
+            user.setPassword(password1);
+            user.setTag(2);
+            DataOperate dataOperate = new DataOperate();
+            dataOperate.add(RegisterActivity.this,user);
             Toast.makeText(RegisterActivity.this,"数据发送",Toast.LENGTH_SHORT).show();
         }
     }

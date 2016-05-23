@@ -7,8 +7,9 @@
     android:layout_height="wrap_content">
     <com.fivefire.app.gdutcontacts.widget.dialpad.searchview.DeletableEditText
         android:id="@+id/et"
-        android:layout_margin="@dimen/spacing_normal"
         android:gravity="center"
+        android:layout_marginLeft="@dimen/spacing_normal"
+        android:layout_marginRight="@dimen/spacing_normal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="@dimen/font_larger"
@@ -19,9 +20,10 @@
     <TableLayout
         android:id="@+id/container"
         android:stretchColumns="0,1,2"
+        android:paddingLeft="@dimen/spacing_normal"
+        android:paddingRight="@dimen/spacing_normal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/spacing_normal"
         >
         <TableRow
             android:layout_marginTop="@dimen/spacing_normal"
