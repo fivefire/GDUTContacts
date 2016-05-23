@@ -9,6 +9,7 @@ import com.fivefire.app.gdutcontacts.model.User;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.DeleteListener;
 import cn.bmob.v3.listener.FindListener;
@@ -22,6 +23,7 @@ import cn.bmob.v3.listener.UpdateListener;
 public class DataOperate {
     String SUCCESS="succeess";
     String ERROR="error";
+    private User user;
 
     public  void  add(final Context context,User user){
         if (user!=null){
@@ -142,21 +144,30 @@ public class DataOperate {
         return  isexit[0]==false;
     }
     public User quenryEqual(Context context,String key,String value){
-        final User[] user = new User[1];
+      //  final User user;
+        Bmob.initialize(context,"58d2bb059cc1244e252cea21b4313d0c");
+        Log.d("66666666666",""+key+value);
         BmobQuery<User> query=new BmobQuery<>();
         query.addWhereEqualTo(key,value);
         query.findObjects(context, new FindListener<User>() {
             @Override
             public void onSuccess(List<User> list) {
-                user[0] =list.get(0);
+                 user = new User();
+                user =list.get(0);
+                Log.d("666666666",user.getPassword());
             }
 
             @Override
             public void onError(int i, String s) {
-
+                Log.d("6666666666",""+i+"   6666   "+s);
             }
         });
-        return user[0];
+        if(user!=null)
+        Log.d("6666666666666",user.getPhone());
+        else {
+            Log.d("66666","666666");
+        }
+        return user;
     }
 
 }
