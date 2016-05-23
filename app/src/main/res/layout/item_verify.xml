@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="@dimen/spacing_tiny"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/list_item_height_huge">
+    <RelativeLayout
+        android:padding="@dimen/spacing_small"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/tv_name"
+            tools:text="蔡嘿嘿"
+            android:textSize="@dimen/font_large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/iv"
+            android:contentDescription="@string/sex"
+            android:src="@drawable/ic_female"
+            android:layout_toRightOf="@id/tv_name"
+            android:layout_toEndOf="@id/tv_name"
+            android:layout_width="@dimen/image_more_small"
+            android:layout_height="@dimen/image_more_small" />
+        <TextView
+            android:id="@+id/tv_class"
+            tools:text="计算机科学与技术8班"
+            android:layout_below="@id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_sno"
+            tools:text="3114001234"
+            android:layout_alignBaseline="@id/tv_name"
+            android:layout_toLeftOf="@id/bt"
+            android:layout_toStartOf="@id/bt"
+            android:layout_toRightOf="@id/iv"
+            android:layout_toEndOf="@id/iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_phone"
+            tools:text="18819475000"
+            android:layout_below="@id/tv_class"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageButton
+            android:id="@+id/bt"
+            android:contentDescription="@null"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_done_white_24dp"
+            android:background="@drawable/bg_ripple_light"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_width="@dimen/image_normal"
+            android:layout_height="@dimen/image_normal" />
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
