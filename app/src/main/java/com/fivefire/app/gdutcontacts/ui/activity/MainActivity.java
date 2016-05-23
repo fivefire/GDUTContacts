@@ -106,6 +106,14 @@ public class MainActivity extends BaseActivity implements OnQueryTextListener {
                 return onOptionsItemSelected(item);
             }
         });
+
+        mNavigationView.getHeaderView(0).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(MainActivity.this,ChangeMeassageActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private List<User> getData() {

@@ -36,7 +36,7 @@
         <activity
             android:name=".ui.activity.LoginActivity"
             android:label="@string/title_activity_login"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity android:name=".ui.activity.FgPasswordActivity" />
         <activity
             android:name=".ui.activity.RegisterActivity"
@@ -44,6 +44,10 @@
         <activity
             android:name=".ui.activity.ChangePasswordActivity"
             android:label="@string/title_activity_change_password"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ui.activity.ChangeMeassageActivity"
+            android:label="@string/title_activity_change_meassage"
             android:theme="@style/AppTheme"></activity>
     </application>
 

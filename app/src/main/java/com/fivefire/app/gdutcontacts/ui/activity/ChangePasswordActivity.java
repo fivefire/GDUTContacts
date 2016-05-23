@@ -43,11 +43,15 @@ public class ChangePasswordActivity extends BaseActivity {
                     showToast("两次输入的新密码不一致");
                     tag = 0;
                 }
-                if (!CheckInfo.confirmOldPassword(old_password)){
-                    showToast("旧密码错误");
+                if(!CheckInfo.isNetworkAvailable(ChangePasswordActivity.this)){
+                    showToast("当前网络不可用");
                     tag = 0;
                 }
-                if(tag == 1){
+                if(tag==1&&!CheckInfo.confirmOldPassword(old_password)){
+                        showToast("旧密码错误");
+                        tag = 0;
+                }
+                else if(tag==1&&CheckInfo.confirmOldPassword(old_password)){
                     showToast("密码修改成功");
                 }
             }
