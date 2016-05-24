@@ -6,11 +6,14 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.os.Handler;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -31,6 +34,8 @@ import com.fivefire.app.gdutcontacts.widget.dialpad.OnQueryTextListener;
  */
 public class DeletableEditText extends EditText implements View.OnFocusChangeListener, TextWatcher {
 
+    private static final long DELAY_TIME = 600;//延迟一秒视为长按
+
     private Drawable mClearIcon;
     private int mClearIconSize;
     private int mIconLeftX;
@@ -39,6 +44,15 @@ public class DeletableEditText extends EditText implements View.OnFocusChangeLis
     private boolean isTouch = false;
     private Resources mResources;
     private OnQueryTextListener mOnQueryTextListener;
+    private int mTintColor;
+
+    private Handler mHandle = new Handler();
+    private Runnable mLongPressRunnable = new Runnable() {
+        @Override
+        public void run() {
+            getText().clear();
+        }
+    };
 
     public DeletableEditText(Context context) {
         this(context, null);
@@ -57,6 +71,8 @@ public class DeletableEditText extends EditText implements View.OnFocusChangeLis
         for (int i = 0; i < count; i++) {
             int attr = typedArray.getIndex(i);
             switch (attr) {
+                case R.styleable.DeletableEditText_tint_color:
+                    mTintColor = typedArray.getColor(R.styleable.DeletableEditText_tint_color, Color.BLACK);
                 case R.styleable.DeletableEditText_clean_icon:
                     mClearIcon = typedArray.getDrawable(R.styleable.DeletableEditText_clean_icon);
                     break;
@@ -77,6 +93,9 @@ public class DeletableEditText extends EditText implements View.OnFocusChangeLis
 
         if (mClearIcon == null) {
             throw new RuntimeException("没有为删除图标设置资源");
+        } else {
+            mClearIcon = DrawableCompat.wrap(mClearIcon);
+            DrawableCompat.setTint(mClearIcon, mTintColor);
         }
 
         mClearIconSize = Math.max(mClearIcon.getIntrinsicWidth(), mClearIcon.getIntrinsicHeight());
@@ -103,6 +122,7 @@ public class DeletableEditText extends EditText implements View.OnFocusChangeLis
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 if (isClearIconVisible) {
+                    mHandle.postDelayed(mLongPressRunnable, DELAY_TIME);
                     //按下事件，且图标可视，此时应该判断第一次按下的位置是否处图标所在位置
                     isTouch = event.getX() > mIconLeftX && event.getX() < mIconRightX;
                 }
@@ -111,6 +131,7 @@ public class DeletableEditText extends EditText implements View.OnFocusChangeLis
                 //手指抬起，且图标可视，此时应该判断位置是否在图标所在位置，若是，再判断isTouch是否为真，为真则清空文本
                 if (event.getX() > mIconLeftX && event.getX() < mIconRightX) {
                     if (isTouch) {
+                        mHandle.removeCallbacks(mLongPressRunnable);
                         int length = length();
                         if (length > 0) {
                             getText().delete(length - 1, length);

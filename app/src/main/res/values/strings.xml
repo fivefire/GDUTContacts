@@ -57,5 +57,6 @@
     <string name="new_password">新密码</string>
     <string name="confirm_password">确认密码</string>
     <string name="confirm">确认</string>
+    <string name="sex">性别</string>
 
 </resources>

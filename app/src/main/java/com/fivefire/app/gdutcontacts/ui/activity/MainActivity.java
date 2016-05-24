@@ -3,6 +3,8 @@ package com.fivefire.app.gdutcontacts.ui.activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.os.PersistableBundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -21,6 +23,7 @@ import com.fivefire.app.gdutcontacts.R;
 import com.fivefire.app.gdutcontacts.adapter.ContactsAdapter;
 import com.fivefire.app.gdutcontacts.model.User;
 import com.fivefire.app.gdutcontacts.ui.common.BaseActivity;
+import com.fivefire.app.gdutcontacts.utils.DataOperate;
 import com.fivefire.app.gdutcontacts.widget.dialpad.NineKeyDialpad;
 import com.fivefire.app.gdutcontacts.widget.dialpad.OnQueryTextListener;
 import com.fivefire.app.gdutcontacts.widget.dialpad.animation.OnAnimationListenerAdapter;
@@ -48,6 +51,18 @@ public class MainActivity extends BaseActivity implements OnQueryTextListener {
 
     private FloatingActionButton mShowButton;
 
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what == 1) {
+                List<User> result = (List<User>) msg.obj;
+                Log.d(TAG, "receive result, size is " + result.size());
+                mAdapter.setData(new ArrayList<>(result));
+                mUserList = (List<User>) msg.obj;
+            }
+        }
+    };
+
     @Override
     protected void initView() {
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -74,8 +89,7 @@ public class MainActivity extends BaseActivity implements OnQueryTextListener {
             }
             mDrawerToggle.syncState();
         }
-        mUserList = getData();
-        mAdapter = new ContactsAdapter(this, new ArrayList<>(mUserList), mNineKeyDialpad);
+        mAdapter = new ContactsAdapter(this, mNineKeyDialpad);
 
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
@@ -106,17 +120,12 @@ public class MainActivity extends BaseActivity implements OnQueryTextListener {
                 return onOptionsItemSelected(item);
             }
         });
+        getData();
     }
 
-    private List<User> getData() {
-        List<User> users = new ArrayList<>();
-        users.add(new User("张杰", "18819475888"));
-        users.add(new User("张树悦", "18819475110"));
-        users.add(new User("周杰伦", "18819475444"));
-        users.add(new User("张嘉伟", "18819577145"));
-        users.add(new User("涨你妹", "18813465813"));
-        users.add(new User("龙应台", "18137321351"));
-        return users;
+    private void getData() {
+        DataOperate operate = new DataOperate();
+        operate.queryAllVerified(this, handler);
     }
 
     private void insertDatabase()

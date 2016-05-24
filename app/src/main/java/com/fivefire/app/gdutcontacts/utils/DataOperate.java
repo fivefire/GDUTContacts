@@ -22,6 +22,8 @@ import cn.bmob.v3.listener.UpdateListener;
  * Created by djd14 on 2016/5/18.
  */
 public class DataOperate {
+    private static final String TAG = "DataOperate";
+
     String SUCCESS="succeess";
     String ERROR="error";
 
@@ -57,14 +59,15 @@ public class DataOperate {
     }
 
     public void querycontains(final Context context,String key,String value, final Handler handler){//模糊搜索
-        final List<User>[] userlist = new List[1];
-        BmobQuery<User> query=new BmobQuery<>();
-        query.addWhereContains(key, value);
+        BmobQuery<User> query = new BmobQuery<>();
+        Log.d(TAG, key + ":" + value);
+        query.addWhereGreaterThan(key, Integer.valueOf(value));
+
         query.findObjects(context, new FindListener<User>() {
             @Override
             public void onSuccess(List<User> list) {
-                userlist[0] = list;
                 Message message=new Message();
+                Log.d(TAG, "" + list.size());
                 message.what=1;
                 message.obj=list;
                 handler.sendMessage(message);
@@ -154,7 +157,7 @@ public class DataOperate {
             @Override
             public void onSuccess(List<User> list) {
                 Message message=new Message();
-                message.what=1;
+                message.what = 1;
                 message.obj=list.get(0);
                 handler.sendMessage(message);
             }
@@ -166,4 +169,24 @@ public class DataOperate {
         });
     }
 
+
+    public void queryAllVerified(final Context context,final Handler handler){
+        BmobQuery<User> query = new BmobQuery<>();
+        query.addWhereLessThan("Tag", 3);
+
+        query.findObjects(context, new FindListener<User>() {
+            @Override
+            public void onSuccess(List<User> list) {
+                Message message=new Message();
+                message.what=1;
+                message.obj=list;
+                handler.sendMessage(message);
+            }
+
+            @Override
+            public void onError(int i, String s) {
+                Toast.makeText(context, "query fail:" + s, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 }

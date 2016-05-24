@@ -10,16 +10,16 @@ import cn.bmob.v3.BmobObject;
  * Created by djd14 on 2016/5/12.
  */
 public class User extends BmobObject implements Serializable, IUser {
-    String Phone;
-    String Sphone;
-    String Name;
-    String Sno;
-    Number Grade;
-    String Password;
-    String Dno;
+    String Phone;//手机
+    String Sphone;//短号
+    String Name;//姓名
+    String Sno;//序号
+    Number Grade;//年级
+    String Password;//密码
+    String Dno;//宿舍号
     Number Tag;//1 is admin 2 is common user whitch has velify  ,3 is not;
-    String Aname;
-    String Note;
+    String Aname;//学院名
+    String Note;//备注
 
     public User(String name, String phone) {
         Phone = phone;

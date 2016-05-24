@@ -105,7 +105,7 @@ public class RegisterActivity extends AppCompatActivity {
             user.setSno(sno);
             user.setName(name);
             user.setPassword(password1);
-            user.setTag(2);
+            user.setTag(3);
             DataOperate dataOperate = new DataOperate();
             dataOperate.add(RegisterActivity.this,user);
             Toast.makeText(RegisterActivity.this,"数据发送",Toast.LENGTH_SHORT).show();
