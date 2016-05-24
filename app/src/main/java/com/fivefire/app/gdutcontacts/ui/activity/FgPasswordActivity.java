@@ -2,6 +2,8 @@ package com.fivefire.app.gdutcontacts.ui.activity;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -11,10 +13,15 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.fivefire.app.gdutcontacts.R;
+import com.fivefire.app.gdutcontacts.model.User;
 import com.fivefire.app.gdutcontacts.ui.common.ClearEditText;
 import com.fivefire.app.gdutcontacts.utils.CheckInfo;
 
+import java.util.List;
+
 import cn.bmob.v3.Bmob;
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.listener.FindListener;
 
 public class FgPasswordActivity extends AppCompatActivity {
     private ClearEditText edt_phone,edt_sno,edt_name;
@@ -87,9 +94,49 @@ public class FgPasswordActivity extends AppCompatActivity {
 
         @Override
         public void onClick(DialogInterface dialogInterface, int i) {
-            //query the info and if the info is right then return the password to the user
+            BmobQuery<User> query=new BmobQuery<>();
+            query.addWhereEqualTo("Phone",mobile);
+            query.findObjects(FgPasswordActivity.this, new FindListener<User>() {
+                @Override
+                public void onSuccess(List<User> list) {
+
+                    if(!list.isEmpty()&&list.get(0).getSno().equals(sno)&&list.get(0).getName().equals(name)){
+                        Toast.makeText(FgPasswordActivity.this,"正在找回，请稍等...",Toast.LENGTH_SHORT).show();
+                        Message message = new Message();
+                        message.what = 1;
+                        message.obj = list.get(0).getPassword();
+                        FgPasswordActivity.this.handler.sendMessageDelayed(message,1000);
+                    }else if(list.isEmpty()){
+                        Toast.makeText(FgPasswordActivity.this,"账号不存在",Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(FgPasswordActivity.this,"学号或者姓名错误",Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onError(int i, String s) {
+                    Toast.makeText(FgPasswordActivity.this,"账号不存在",Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
+
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what){
+                case 1 :
+                    new AlertDialog.Builder(FgPasswordActivity.this)
+                            .setTitle("密码找回")
+                            .setMessage("密码："+msg.obj)
+                            .setPositiveButton("确定",null)
+                            .create()
+                            .show();
+                    break;
+                default:break;
+            }
+        }
+    };
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

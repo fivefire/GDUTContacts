@@ -108,7 +108,7 @@ public class RegisterActivity extends AppCompatActivity {
             user.setTag(3);
             DataOperate dataOperate = new DataOperate();
             dataOperate.add(RegisterActivity.this,user);
-            Toast.makeText(RegisterActivity.this,"数据发送",Toast.LENGTH_SHORT).show();
+            Toast.makeText(RegisterActivity.this,"数据发送中...",Toast.LENGTH_SHORT).show();
         }
     }
 
