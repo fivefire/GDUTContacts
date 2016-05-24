@@ -1,6 +1,7 @@
 package com.fivefire.app.gdutcontacts.ui.activity;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -18,7 +19,6 @@ import com.fivefire.app.gdutcontacts.ui.common.ClearEditText;
 import com.fivefire.app.gdutcontacts.utils.CheckInfo;
 
 import java.util.List;
-import java.util.logging.LogRecord;
 
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobQuery;
@@ -28,6 +28,7 @@ public class LoginActivity extends Activity {
     private ClearEditText loginUser,loginPassword;
     private Button btn_signIn,btn_regisetr,btn_fgPassword;
     private String account,password;
+    private ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,7 +83,7 @@ public class LoginActivity extends Activity {
 
         @Override
         public void onClick(View view) {
-            Bmob.initialize(LoginActivity.this,"58d2bb059cc1244e252cea21b4313d0c");
+
             switch (view.getId()){
                 case R.id.signIn :
                     account = loginUser.getText().toString();
@@ -97,19 +98,23 @@ public class LoginActivity extends Activity {
                                 query.findObjects(LoginActivity.this, new FindListener<User>() {
                                     @Override
                                     public void onSuccess(List<User> list) {
+
                                         if(!list.isEmpty()&&list.get(0).getPassword().equals(password)&&list.get(0).getTag().intValue()!=3){
+                                            Toast.makeText(LoginActivity.this,"正在登陆...",Toast.LENGTH_SHORT).show();
                                             Message message = new Message();
                                             message.what = 1;
                                             message.obj = list.get(0);
-                                            LoginActivity.this.handler.sendMessage(message);
-                                        }else {
+                                            LoginActivity.this.handler.sendMessageDelayed(message,1300);
+                                        }else if(list.isEmpty()){
                                             Toast.makeText(LoginActivity.this,"账号不正确",Toast.LENGTH_SHORT).show();
+                                        }else{
+                                            Toast.makeText(LoginActivity.this,"密码不正确",Toast.LENGTH_SHORT).show();
                                         }
                                     }
 
                                     @Override
                                     public void onError(int i, String s) {
-                                        Log.d("6666666666",""+i+"   6666   "+s);
+                                        Toast.makeText(LoginActivity.this,"账号不正确",Toast.LENGTH_SHORT).show();
                                     }
                                 });
                             }else{

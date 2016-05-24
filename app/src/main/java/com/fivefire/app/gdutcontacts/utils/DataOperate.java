@@ -30,12 +30,12 @@ public class DataOperate {
             user.save(context, new SaveListener() {
                 @Override
                 public void onSuccess() {
-                    Toast.makeText(context,"add the user date successfully!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context,"注册成功，请等候管理员确认!",Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
                 public void onFailure(int i, String s) {
-                     Toast.makeText(context,"add the user data fail:"+s,Toast.LENGTH_SHORT).show();
+                     Toast.makeText(context,"注册失败，用户已经存在:",Toast.LENGTH_SHORT).show();
                 }
             });
         }
