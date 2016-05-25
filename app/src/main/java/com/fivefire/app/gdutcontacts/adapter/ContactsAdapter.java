@@ -30,11 +30,15 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
 
     private Context mContext;
 
-    public ContactsAdapter(Context context, List<User> mData, INineKeyDialpad nineKeyDialpad) {
+    public ContactsAdapter(Context context,INineKeyDialpad nineKeyDialpad) {
         mContext = context;
         mNineKeyDialpad = nineKeyDialpad;
         mInflater = LayoutInflater.from(context);
-        this.mData = mData;
+    }
+
+    public void setData(List<User> data) {
+        this.mData = data;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -68,7 +72,10 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
 
     @Override
     public int getItemCount() {
-        return mData.size();
+        if (mData != null) {
+            return mData.size();
+        }
+        return 0;
     }
 
     public void animateTo(List<User> data) {

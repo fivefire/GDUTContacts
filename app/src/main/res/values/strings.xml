@@ -9,7 +9,7 @@
     <string name="exit">退出</string>
     <string name="title_activity_search">SearchActivity</string>
     <string name="Acadeny">学院</string>
-    <string name="Grade">年级:</string>
+    <string name="Grade">年级</string>
     <string-array name="Academy">
         <item>计算机学院</item>
         <item>机电工程学院</item>
@@ -64,4 +64,6 @@
     <string name="Sphone">短号:</string>
     <string name="Note" >备注:</string>
     <string name="acadeny" >学院:</string>
+    <string name="sex">性别</string>
+
 </resources>

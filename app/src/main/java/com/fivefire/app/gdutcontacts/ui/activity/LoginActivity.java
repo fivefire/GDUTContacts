@@ -1,9 +1,12 @@
 package com.fivefire.app.gdutcontacts.ui.activity;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -11,15 +14,21 @@ import android.widget.Toast;
 
 
 import com.fivefire.app.gdutcontacts.R;
+import com.fivefire.app.gdutcontacts.model.User;
 import com.fivefire.app.gdutcontacts.ui.common.ClearEditText;
 import com.fivefire.app.gdutcontacts.utils.CheckInfo;
-import com.fivefire.app.gdutcontacts.utils.DataOperate;
+
+import java.util.List;
 
 import cn.bmob.v3.Bmob;
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.listener.FindListener;
 
 public class LoginActivity extends Activity {
     private ClearEditText loginUser,loginPassword;
     private Button btn_signIn,btn_regisetr,btn_fgPassword;
+    private String account,password;
+    private ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,27 +57,66 @@ public class LoginActivity extends Activity {
         btn_fgPassword = (Button)findViewById(R.id.login_forgot_pass);
         btn_fgPassword.setOnClickListener(new LoginAction());
     }
+
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what){
+                case 1 :
+                    User user = (User) msg.obj;
+                    if(user.getPassword().equals(password)&&user.getTag().intValue()!=3) {
+                        Intent intent = new Intent();
+                        intent.setClass(LoginActivity.this,MainActivity.class);
+                        startActivity(intent);
+                    }else{
+                        Toast.makeText(LoginActivity.this,"密码不正确",Toast.LENGTH_SHORT).show();
+                    }
+
+                    break;
+
+                default:break;
+            }
+        }
+    };
+
     class LoginAction implements View.OnClickListener {
 
         @Override
         public void onClick(View view) {
+
             switch (view.getId()){
                 case R.id.signIn :
-                    String account = loginUser.getText().toString();
-                    String password = loginPassword.getText().toString();
+                    account = loginUser.getText().toString();
+                    password = loginPassword.getText().toString();
                     if (CheckInfo.isNetworkAvailable(LoginActivity.this)){
 
                         if (!account.equals("")&&!password.equals("")){
                             if (CheckInfo.isMobile(account)){
-                                DataOperate dataOperate = new DataOperate();
-                                boolean isExist = dataOperate.login(LoginActivity.this,account,password);
-                                if(isExist){ //if account and password is right then go to the MainActivity
-                                    Intent intent = new Intent();
-                                    intent.setClass(LoginActivity.this,MainActivity.class);
-                                    startActivity(intent);
-                                }else{
-                                    Toast.makeText(LoginActivity.this,"账户或密码不正确",Toast.LENGTH_SHORT).show();
-                                }
+
+                                BmobQuery<User> query=new BmobQuery<>();
+                                query.addWhereEqualTo("Phone",account);
+                                query.findObjects(LoginActivity.this, new FindListener<User>() {
+                                    @Override
+                                    public void onSuccess(List<User> list) {
+
+                                        if(!list.isEmpty()&&list.get(0).getPassword().equals(password)&&list.get(0).getTag().intValue()!=3){
+                                            Toast.makeText(LoginActivity.this,"正在登陆...",Toast.LENGTH_SHORT).show();
+                                            Message message = new Message();
+                                            message.what = 1;
+                                            message.obj = list.get(0);
+                                            LoginActivity.this.handler.sendMessageDelayed(message,1300);
+                                        }else if(list.isEmpty()){
+                                            Toast.makeText(LoginActivity.this,"账号不正确",Toast.LENGTH_SHORT).show();
+                                        }else{
+                                            Toast.makeText(LoginActivity.this,"密码不正确",Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onError(int i, String s) {
+                                        Toast.makeText(LoginActivity.this,"账号不正确",Toast.LENGTH_SHORT).show();
+                                    }
+                                });
                             }else{
                                 Toast.makeText(LoginActivity.this,"账号不正确",Toast.LENGTH_SHORT).show();
                             }

@@ -16,6 +16,7 @@
         android:inputType="none"
         android:textIsSelectable="true"
         app:clean_icon="@drawable/ic_backspace_black_24dp"
+        app:tint_color="@color/accent"
         />
     <TableLayout
         android:id="@+id/container"

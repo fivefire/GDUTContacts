@@ -1,6 +1,8 @@
 package com.fivefire.app.gdutcontacts.utils;
 
 import android.content.Context;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -20,6 +22,8 @@ import cn.bmob.v3.listener.UpdateListener;
  * Created by djd14 on 2016/5/18.
  */
 public class DataOperate {
+    private static final String TAG = "DataOperate";
+
     String SUCCESS="succeess";
     String ERROR="error";
 
@@ -54,15 +58,19 @@ public class DataOperate {
         });
     }
 
-    public List<User> querycontains(final Context context,String key,String value){//模糊搜索
-        final List<User>[] userlist = new List[1];
-        BmobQuery<User> query=new BmobQuery<>();
-        query.addWhereContains(key, value);
+    public void querycontains(final Context context,String key,String value, final Handler handler){//模糊搜索
+        BmobQuery<User> query = new BmobQuery<>();
+        Log.d(TAG, key + ":" + value);
+        query.addWhereGreaterThan(key, Integer.valueOf(value));
+
         query.findObjects(context, new FindListener<User>() {
             @Override
             public void onSuccess(List<User> list) {
-                userlist[0] = list;
-
+                Message message=new Message();
+                Log.d(TAG, "" + list.size());
+                message.what=1;
+                message.obj=list;
+                handler.sendMessage(message);
             }
 
             @Override
@@ -70,16 +78,17 @@ public class DataOperate {
                 Toast.makeText(context, "query fail:" + s, Toast.LENGTH_SHORT).show();
             }
         });
-        return userlist[0];
     }
 
-    public User queryabsolutly(final Context context,String objectid){
-        final User[] user = new User[1];
+    public void queryabsolutly(final Context context,String objectid , final Handler handler){
         BmobQuery<User> query=new BmobQuery<>();
         query.getObject(context, objectid, new GetListener<User>() {
             @Override
-            public void onSuccess(User muser) {
-                user[0] = muser;
+            public void onSuccess(User user) {
+               Message message=new Message();
+                message.what=1;
+                message.obj=user;
+                handler.sendMessage(message);
                 Toast.makeText(context, "query user successfully", Toast.LENGTH_SHORT).show();
             }
 
@@ -88,7 +97,6 @@ public class DataOperate {
                 Toast.makeText(context, "query user fail:" + s, Toast.LENGTH_SHORT).show();
             }
         });
-        return user[0];
     }
 
    public void delete(final Context context,String objectid){
@@ -107,8 +115,8 @@ public class DataOperate {
        });
    }
 
-    public boolean login(final Context context,String phone,String password){
-         final   boolean [] isexit=new boolean[1];
+    public void login(final Context context,String phone,String password , final Handler handler){
+
         BmobQuery<com.fivefire.app.gdutcontacts.model.User> queryphone=new BmobQuery<>();
         queryphone.addWhereEqualTo("Phone",phone);
         BmobQuery<User> querypassword=new BmobQuery<>();
@@ -121,24 +129,64 @@ public class DataOperate {
         list.add(querytag);
         BmobQuery<User> querylist=new BmobQuery<>();
         querylist.and(list);
-        Log.d("66666666","666666666");
         querylist.findObjects(context, new FindListener<User>() {
             @Override
             public void onSuccess(List<User> list) {
-                Log.d("66666666","999999999");
-                isexit[0]=true;
-                Log.d("66666666","999999999"+isexit[0]);
+                Message message = new Message();
+                message.what = 1;
+                message.obj = true;
+                handler.sendMessage(message);
 
             }
 
             @Override
             public void onError(int i, String s) {
-                Log.d("66666666","22222222222222");
-               // isexit[0]=false;
-                Toast.makeText(context,"error code:"+i+"message:"+s,Toast.LENGTH_SHORT).show();
+                Message message = new Message();
+                message.what = 1;
+                message.obj = false;
+                handler.sendMessage(message);
+                Toast.makeText(context, "error code:" + i + "message:" + s, Toast.LENGTH_SHORT).show();
             }
         });
-        Log.d("66666666","555555555"+isexit[0]);
-        return  isexit[0]==false;
+    }
+    public void quenryEqual(final Context context,String key,String value , final Handler handler){
+        final User[] user = new User[1];
+        BmobQuery<User> query=new BmobQuery<>();
+        query.addWhereEqualTo(key,value);
+        query.findObjects(context, new FindListener<User>() {
+            @Override
+            public void onSuccess(List<User> list) {
+                Message message=new Message();
+                message.what = 1;
+                message.obj=list.get(0);
+                handler.sendMessage(message);
+            }
+
+            @Override
+            public void onError(int code, String mgs) {
+             Toast.makeText(context,"code:"+" message:"+mgs,Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
+    public void queryAllVerified(final Context context,final Handler handler){
+        BmobQuery<User> query = new BmobQuery<>();
+        query.addWhereLessThan("Tag", 3);
+
+        query.findObjects(context, new FindListener<User>() {
+            @Override
+            public void onSuccess(List<User> list) {
+                Message message=new Message();
+                message.what=1;
+                message.obj=list;
+                handler.sendMessage(message);
+            }
+
+            @Override
+            public void onError(int i, String s) {
+                Toast.makeText(context, "query fail:" + s, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
