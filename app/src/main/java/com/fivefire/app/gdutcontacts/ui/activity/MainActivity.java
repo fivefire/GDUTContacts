@@ -2,6 +2,7 @@ package com.fivefire.app.gdutcontacts.ui.activity;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -17,21 +18,18 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 
 import com.fivefire.app.gdutcontacts.R;
 import com.fivefire.app.gdutcontacts.adapter.ContactsAdapter;
 import com.fivefire.app.gdutcontacts.model.User;
 import com.fivefire.app.gdutcontacts.ui.common.BaseActivity;
+import com.fivefire.app.gdutcontacts.utils.DBUtils;
 import com.fivefire.app.gdutcontacts.utils.DataOperate;
 import com.fivefire.app.gdutcontacts.widget.dialpad.NineKeyDialpad;
 import com.fivefire.app.gdutcontacts.widget.dialpad.OnQueryTextListener;
 import com.fivefire.app.gdutcontacts.widget.dialpad.animation.OnAnimationListenerAdapter;
 import com.fivefire.app.gdutcontacts.widget.dialpad.query.IQuery;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,9 +46,21 @@ public class MainActivity extends BaseActivity implements OnQueryTextListener {
     private IQuery mQuery;//查询器
     private List<User> mUserList;
     private ContactsAdapter mAdapter;//Rv的Adapter
-
+    List<User> list = new ArrayList<>();
     private FloatingActionButton mShowButton;
+    private SQLiteDatabase db;
 
+    final String sql="CREATE TABLE "+"UserMassage"+" (" +
+            "Phone  varchar(11) NOT NULL ," +
+            "Sphone  varchar(11) NULL ," +
+            "Name  varchar(20) NOT NULL ," +
+            "Sno  varchar(10) NULL ," +
+            "Grade  int NULL ," +
+            "Dno  varchar(10) NULL ," +
+            "AName  varchar(10) NULL ," +
+            "Note  varchar(50) NULL ," +
+            "PRIMARY KEY (`Phone`)" +
+            ")";
     private Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -121,17 +131,19 @@ public class MainActivity extends BaseActivity implements OnQueryTextListener {
             }
         });
         getData();
+        insertDatabase();
     }
 
     private void getData() {
         DataOperate operate = new DataOperate();
-        operate.queryAllVerified(this, handler);
+        //operate.queryAllVerified(this, handler);
     }
 
     private void insertDatabase()
     {
-        final String path=this.getFilesDir().getPath();
-        final String filename="temp.db";
+        /*final String path=this.getFilesDir().getPath();
+        final String filename="User.db";
+        sqLiteUtils = new SQLiteUtils(MainActivity.this);
         File dir = new File(path);
         if (!dir.exists())
         {
@@ -139,18 +151,42 @@ public class MainActivity extends BaseActivity implements OnQueryTextListener {
             {
                 showToast("路径创建失败");
             }
+
         }
-        File file = new File(path+"/"+filename);
+        db = SQLiteDatabase.openOrCreateDatabase(path+"/"+filename,null);
+
+        db.execSQL(sql);*/
+        db= this.openOrCreateDatabase("User.db",MODE_PRIVATE,null);
         try
         {
-            InputStream inputStream = this.getApplication().getResources().openRawResource(R.raw.temp);
+            db.execSQL(sql);
+            Handler handler = new Handler(){
+                @Override
+                public void handleMessage(Message msg) {
+                    if (msg.what==1){
+                        list=(List<User>) msg.obj;
+                        Log.e("size",list.size()+"");
+                        for (int i=0;i<list.size();i++)
+                        {
+                            DBUtils.insertAll(db,list.get(i));
+                        }
+                        Log.e("massage","插入完成");
+                    }
+                }
+            };
+            DataOperate dataOperate = new DataOperate();
+            dataOperate.getAllUsers(this,handler);
+
+
+            /*InputStream inputStream = this.getApplication().getResources().openRawResource(R.raw.temp);
             FileOutputStream fos = new FileOutputStream(file);
             byte[] buf = new byte[inputStream.available()];
             inputStream.read(buf);
             fos.write(buf);
             fos.flush();
             fos.close();
-            inputStream.close();
+            inputStream.close();*/
+
 
         }catch (Exception e)
         {

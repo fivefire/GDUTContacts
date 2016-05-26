@@ -30,9 +30,8 @@ public class ClassifyAcativity extends BaseActivity {
     @Override
     protected void setupView(Bundle savedInstanceState) {
 
-        String path = this.getFilesDir().getPath();
-        String filename = "temp.db";
-        db = SQLiteDatabase.openOrCreateDatabase(path + "/" + filename, null);
+
+        db = this.openOrCreateDatabase("User.db",MODE_PRIVATE,null);
 
         final Intent intent=getIntent();
         massage = intent.getStringExtra("Message");

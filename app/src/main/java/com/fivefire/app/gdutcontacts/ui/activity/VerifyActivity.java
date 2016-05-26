@@ -55,7 +55,7 @@ public class VerifyActivity extends BaseActivity {
 
     private void getData() {
         DataOperate dataOperate = new DataOperate();
-        dataOperate.querycontains(this, "Tag", "2", mHandle);
+        //dataOperate.querycontains(this, "Tag", "2", mHandle);
     }
 
     private void setupActionBar() {
