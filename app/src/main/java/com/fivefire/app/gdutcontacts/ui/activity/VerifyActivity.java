@@ -1,6 +1,9 @@
 package com.fivefire.app.gdutcontacts.ui.activity;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +19,7 @@ import com.fivefire.app.gdutcontacts.model.User;
 import com.fivefire.app.gdutcontacts.ui.common.BaseActivity;
 import com.fivefire.app.gdutcontacts.utils.DataOperate;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 import cn.bmob.v3.Bmob;
@@ -27,16 +31,34 @@ public class VerifyActivity extends BaseActivity {
     private VerifyAdapter mAdapter;
 
     @SuppressWarnings("unchecked")
-    private Handler mHandle = new Handler(){
+    private Handler mHandle = new MyHandler(this);
+
+
+    static class MyHandler extends Handler {
+        private final WeakReference<VerifyActivity> mActivity;
+
+        public MyHandler(VerifyActivity activity) {
+            mActivity = new WeakReference<>(activity);
+        }
+
         @Override
         public void handleMessage(Message msg) {
-            if (msg.what == 1) {
-                List<User> result = (List<User>) msg.obj;
-                Log.d(TAG, "receiving msg" + result.size());
-                mAdapter.setData(result);
+            VerifyActivity activity = mActivity.get();
+            if (activity != null) {
+                activity.handleMessage(msg);
             }
         }
-    };
+    }
+
+    @SuppressWarnings("unchecked")
+    private void handleMessage(Message msg) {
+        if (msg.what == 1) {
+            List<User> result = (List<User>) msg.obj;
+            Log.d(TAG, "in main looper? " + (Looper.myLooper() == Looper.getMainLooper()));
+            mAdapter.setData(result);
+        }
+    }
+
 
     @Override
     protected void initView() {

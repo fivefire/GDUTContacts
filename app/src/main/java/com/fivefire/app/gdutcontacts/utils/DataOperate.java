@@ -2,6 +2,7 @@ package com.fivefire.app.gdutcontacts.utils;
 
 import android.content.Context;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
