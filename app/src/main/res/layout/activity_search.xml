@@ -26,6 +26,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:background="@drawable/btn_select"
             android:text="@string/Search"/>
 
     </LinearLayout>
@@ -42,12 +43,14 @@
             android:layout_height="wrap_content"
             android:text="@string/Acadeny"
             android:id="@+id/AnameSearch"
+            android:background="@drawable/btn_select"
             android:layout_gravity="center_horizontal" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Grade"
+            android:background="@drawable/btn_select"
             android:id="@+id/GradeSearch" />
     </LinearLayout>
 

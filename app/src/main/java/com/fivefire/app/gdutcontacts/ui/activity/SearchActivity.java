@@ -75,6 +75,7 @@ public class SearchActivity extends BaseActivity {
         SearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.e("Searchkey",SearchKey.getText().toString());
                 user=DBUtils.SearchUserByKey(SearchKey.getText().toString(),db);
                 if (user==null)
                 {

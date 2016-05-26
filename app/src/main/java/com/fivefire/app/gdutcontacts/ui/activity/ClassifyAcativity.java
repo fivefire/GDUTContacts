@@ -50,11 +50,19 @@ public class ClassifyAcativity extends BaseActivity {
                  */
                 ArrayList<User> list = new ArrayList<User>();
                 list = DBUtils.SearchUserByANameOrGrade(Contenx[position],massage,db);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("data",list);
-                Intent i = new Intent(ClassifyAcativity.this,DoubleMassageActivity.class);
-                i.putExtras(bundle);
-                startActivity(i);
+                if(list.size()==0)
+                {
+                    showToast("不存在数据");
+                }
+                else
+                {
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("data",list);
+                    Intent i = new Intent(ClassifyAcativity.this,DoubleMassageActivity.class);
+                    i.putExtras(bundle);
+                    startActivity(i);
+                }
+
             }
         });
     }
