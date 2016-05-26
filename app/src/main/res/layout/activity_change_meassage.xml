@@ -21,7 +21,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_change_meassage" />
+    <include layout="@layout/content_change_message" />
 
 
 </android.support.design.widget.CoordinatorLayout>

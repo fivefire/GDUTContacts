@@ -65,5 +65,6 @@
     <string name="Note" >备注:</string>
     <string name="acadeny" >学院:</string>
     <string name="sex">性别</string>
+    <string name="edit_grade">年级:</string>
 
 </resources>

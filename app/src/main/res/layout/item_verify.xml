@@ -18,7 +18,7 @@
         <ImageView
             android:id="@+id/iv"
             android:contentDescription="@string/sex"
-            android:src="@drawable/ic_female"
+            android:src="@drawable/ic_sex"
             android:layout_toRightOf="@id/tv_name"
             android:layout_toEndOf="@id/tv_name"
             android:layout_width="@dimen/image_more_small"

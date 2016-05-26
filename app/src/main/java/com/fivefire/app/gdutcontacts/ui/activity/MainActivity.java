@@ -90,7 +90,6 @@ public class MainActivity extends BaseActivity implements OnQueryTextListener {
             mDrawerToggle.syncState();
         }
         mAdapter = new ContactsAdapter(this, mNineKeyDialpad);
-
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
@@ -121,8 +120,7 @@ public class MainActivity extends BaseActivity implements OnQueryTextListener {
             }
         });
         getData();
-
-        mNavigationView.getHeaderView(0).setOnClickListener(new View.OnClickListener() {
+        mNavigationView.getHeaderView(0).findViewById(R.id.iv).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(MainActivity.this,ChangeMeassageActivity.class);

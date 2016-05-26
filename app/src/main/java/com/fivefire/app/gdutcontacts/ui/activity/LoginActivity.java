@@ -17,6 +17,8 @@ import com.fivefire.app.gdutcontacts.R;
 import com.fivefire.app.gdutcontacts.model.User;
 import com.fivefire.app.gdutcontacts.ui.common.ClearEditText;
 import com.fivefire.app.gdutcontacts.utils.CheckInfo;
+import com.fivefire.app.gdutcontacts.utils.UserMessage;
+
 
 import java.util.List;
 
@@ -100,6 +102,7 @@ public class LoginActivity extends Activity {
                                     public void onSuccess(List<User> list) {
 
                                         if(!list.isEmpty()&&list.get(0).getPassword().equals(password)&&list.get(0).getTag().intValue()!=3){
+                                            UserMessage.saveUser(list.get(0),LoginActivity.this);//保存登录用户的号码
                                             Toast.makeText(LoginActivity.this,"正在登陆...",Toast.LENGTH_SHORT).show();
                                             Message message = new Message();
                                             message.what = 1;
@@ -110,7 +113,7 @@ public class LoginActivity extends Activity {
                                         }else{
                                             Toast.makeText(LoginActivity.this,"密码不正确",Toast.LENGTH_SHORT).show();
                                         }
-                                    }
+                                     }
 
                                     @Override
                                     public void onError(int i, String s) {

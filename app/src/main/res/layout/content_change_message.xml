@@ -22,12 +22,11 @@
           android:layout_marginRight="10dp"
           android:layout_marginTop="10dp"
           android:text="@string/name"
-          android:textSize="24sp"
-          />
+          android:textSize="24sp" />
       <com.fivefire.app.gdutcontacts.ui.common.ClearEditText
           android:layout_alignParentRight="true"
           android:layout_alignParentEnd="true"
-          android:id="@+id/edit_name"
+          android:id="@+id/edit_Name"
           android:layout_width="200dp"
           android:layout_height="wrap_content"
           android:layout_gravity="center"
@@ -37,7 +36,6 @@
           android:background="@drawable/bg_edittext"
           android:drawablePadding="10dp"
           android:drawableRight="@drawable/delete_select"
-          android:drawableEnd="@drawable/delete_select"
           android:inputType="text"
           android:textSize="24sp" />
 
@@ -55,8 +53,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
             android:text="@string/Sno"
-            android:textSize="24sp"
-            />
+            android:textSize="24sp" />
         <com.fivefire.app.gdutcontacts.ui.common.ClearEditText
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
@@ -70,7 +67,6 @@
             android:background="@drawable/bg_edittext"
             android:drawablePadding="10dp"
             android:drawableRight="@drawable/delete_select"
-            android:drawableEnd="@drawable/delete_select"
             android:inputType="text"
             android:textSize="24sp" />
 
@@ -87,9 +83,8 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:text="@string/Grade"
-            android:textSize="24sp"
-            />
+            android:text="@string/edit_grade"
+            android:textSize="24sp" />
         <com.fivefire.app.gdutcontacts.ui.common.ClearEditText
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
@@ -103,7 +98,6 @@
             android:background="@drawable/bg_edittext"
             android:drawablePadding="10dp"
             android:drawableRight="@drawable/delete_select"
-            android:drawableEnd="@drawable/delete_select"
             android:inputType="text"
             android:textSize="24sp" />
 
@@ -121,8 +115,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
             android:text="@string/acadeny"
-            android:textSize="24sp"
-            />
+            android:textSize="24sp" />
         <com.fivefire.app.gdutcontacts.ui.common.ClearEditText
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
@@ -136,7 +129,6 @@
             android:background="@drawable/bg_edittext"
             android:drawablePadding="10dp"
             android:drawableRight="@drawable/delete_select"
-            android:drawableEnd="@drawable/delete_select"
             android:inputType="text"
             android:textSize="24sp" />
 
@@ -154,8 +146,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
             android:text="@string/Dno"
-            android:textSize="24sp"
-            />
+            android:textSize="24sp" />
         <com.fivefire.app.gdutcontacts.ui.common.ClearEditText
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
@@ -169,7 +160,6 @@
             android:background="@drawable/bg_edittext"
             android:drawablePadding="10dp"
             android:drawableRight="@drawable/delete_select"
-            android:drawableEnd="@drawable/delete_select"
             android:inputType="text"
             android:textSize="24sp" />
 
@@ -187,8 +177,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
             android:text="@string/Phone"
-            android:textSize="24sp"
-            />
+            android:textSize="24sp" />
         <com.fivefire.app.gdutcontacts.ui.common.ClearEditText
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
@@ -202,7 +191,6 @@
             android:background="@drawable/bg_edittext"
             android:drawablePadding="10dp"
             android:drawableRight="@drawable/delete_select"
-            android:drawableEnd="@drawable/delete_select"
             android:inputType="text"
             android:textSize="24sp" />
 
@@ -235,7 +223,6 @@
             android:background="@drawable/bg_edittext"
             android:drawablePadding="10dp"
             android:drawableRight="@drawable/delete_select"
-            android:drawableEnd="@drawable/delete_select"
             android:inputType="text"
             android:textSize="24sp" />
 
@@ -258,7 +245,7 @@
         <com.fivefire.app.gdutcontacts.ui.common.ClearEditText
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:id="@+id/note"
+            android:id="@+id/edit_Note"
             android:layout_width="200dp"
             android:layout_height="150dp"
             android:layout_gravity="center"
@@ -269,7 +256,6 @@
             android:background="@drawable/bg_edittext"
             android:drawablePadding="10dp"
             android:drawableRight="@drawable/delete_select"
-            android:drawableEnd="@drawable/delete_select"
             android:inputType="textMultiLine"
             android:textSize="24sp" />
 

@@ -1,9 +1,11 @@
 package com.fivefire.app.gdutcontacts.utils;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-
+import com.fivefire.app.gdutcontacts.model.User;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -63,7 +65,23 @@ public class CheckInfo {
      * 修改密码时，判断旧密码是否正确
      */
 
-    public static boolean confirmOldPassword(String old_password){
+    public static boolean confirmOldPassword(String old_password,Context context){
+        SharedPreferences pref=context.getSharedPreferences("data",Context.MODE_PRIVATE);
+        String phone=pref.getString("name","");
+        String path = context.getFilesDir().getPath();
+        String filename = "temp.db";
+        SQLiteDatabase  db = SQLiteDatabase.openOrCreateDatabase(path + "/" + filename, null);
+        User user=DBUtils.SearchUserByKey(phone,db);
+        String userPassword=user.getPassword();
+        if(userPassword.equals(old_password)){
+            return true;
+        }
         return false;
+    }
+
+    public static boolean isNote(String note){
+        if(note.length()>50)
+            return false;
+        return true;
     }
 }
