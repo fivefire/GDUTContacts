@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.fivefire.app.gdutcontacts.R;
 import com.fivefire.app.gdutcontacts.adapter.VerifyAdapter;
@@ -24,14 +26,20 @@ import java.util.List;
 
 import cn.bmob.v3.Bmob;
 
-public class VerifyActivity extends BaseActivity {
+public class VerifyActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
     private static final String TAG = "VerifyActivity";
     private RecyclerView mRecyclerView;
 
     private VerifyAdapter mAdapter;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @SuppressWarnings("unchecked")
     private Handler mHandle = new MyHandler(this);
+
+    @Override
+    public void onRefresh() {
+        getData();
+    }
 
 
     static class MyHandler extends Handler {
@@ -54,8 +62,12 @@ public class VerifyActivity extends BaseActivity {
     private void handleMessage(Message msg) {
         if (msg.what == 1) {
             List<User> result = (List<User>) msg.obj;
-            Log.d(TAG, "in main looper? " + (Looper.myLooper() == Looper.getMainLooper()));
             mAdapter.setData(result);
+        } else {
+            Toast.makeText(this, "获取失败，请稍后再试！", Toast.LENGTH_SHORT).show();
+        }
+        if (swipeRefreshLayout.isRefreshing()) {
+            swipeRefreshLayout.setRefreshing(false);
         }
     }
 
@@ -63,6 +75,7 @@ public class VerifyActivity extends BaseActivity {
     @Override
     protected void initView() {
         mRecyclerView = (RecyclerView) findViewById(R.id.rv);
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.refresh_layout);
         Bmob.initialize(this, "58d2bb059cc1244e252cea21b4313d0c");
     }
 
@@ -72,12 +85,13 @@ public class VerifyActivity extends BaseActivity {
         mAdapter = new VerifyAdapter(this);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        swipeRefreshLayout.setOnRefreshListener(this);
         getData();
     }
 
     private void getData() {
         DataOperate dataOperate = new DataOperate();
-        //dataOperate.querycontains(this, "Tag", "2", mHandle);
+        dataOperate.queryContains(this, "Tag", "2", mHandle);
     }
 
     private void setupActionBar() {

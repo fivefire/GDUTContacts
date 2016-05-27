@@ -1,5 +1,6 @@
 package com.fivefire.app.gdutcontacts.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.fivefire.app.gdutcontacts.model.User;
+import com.fivefire.app.gdutcontacts.ui.activity.VerifyActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,6 +59,8 @@ public class DataOperate {
         });
     }
 
+
+
     public List<User> querycontains(final Context context,String key,String value){//模糊搜索
         final List<User>[] userlist = new List[1];
         BmobQuery<User> query=new BmobQuery<>();
@@ -65,7 +69,6 @@ public class DataOperate {
             @Override
             public void onSuccess(List<User> list) {
                 userlist[0] = list;
-
             }
 
             @Override
@@ -160,6 +163,25 @@ public class DataOperate {
             @Override
             public void onError(int i, String s) {
 
+            }
+        });
+    }
+
+    public void queryContains(Context context, String key, String value, final Handler handler) {
+        BmobQuery<User> query=new BmobQuery<>();
+        query.addWhereContains(key, value);
+        query.findObjects(context, new FindListener<User>() {
+            @Override
+            public void onSuccess(List<User> list) {
+                Message result = new Message();
+                result.obj = list;
+                result.what = 1;
+                handler.sendMessage(result);
+            }
+
+            @Override
+            public void onError(int i, String s) {
+                handler.sendEmptyMessage(2);
             }
         });
     }
