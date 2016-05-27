@@ -97,6 +97,6 @@ public class NineKeyQuery implements IQuery {
                 }
             }
         }
-        return filteredModelListByName;
+        return filteredModelListByNumber;
     }
 }

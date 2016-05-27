@@ -139,7 +139,7 @@ public class MainActivity extends BaseActivity implements OnQueryTextListener {
 
     private void getData() {
         DataOperate operate = new DataOperate();
-        //operate.queryAllVerified(this, handler);
+        operate.getAllUsers(this, handler);
     }
 
     private void insertDatabase()
