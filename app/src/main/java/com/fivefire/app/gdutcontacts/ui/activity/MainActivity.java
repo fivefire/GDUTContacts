@@ -5,6 +5,7 @@ import android.content.res.Configuration;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.os.PersistableBundle;
 import android.support.design.widget.FloatingActionButton;
@@ -61,7 +62,9 @@ public class MainActivity extends BaseActivity implements OnQueryTextListener {
             "Note  varchar(50) NULL ," +
             "PRIMARY KEY (`Phone`)" +
             ")";
-    private Handler handler = new Handler(){
+
+    @SuppressWarnings("unchecked")
+    private Handler handler = new Handler(Looper.getMainLooper()){
         @Override
         public void handleMessage(Message msg) {
             if (msg.what == 1) {
@@ -160,7 +163,7 @@ public class MainActivity extends BaseActivity implements OnQueryTextListener {
         try
         {
             db.execSQL(sql);
-            Handler handler = new Handler(){
+            Handler handler = new Handler(Looper.getMainLooper()){
                 @Override
                 public void handleMessage(Message msg) {
                     if (msg.what==1){
@@ -255,10 +258,12 @@ public class MainActivity extends BaseActivity implements OnQueryTextListener {
     @SuppressWarnings("unchecked")
     public void onQueryTextChange(String newText) {
         List<User> users = (List<User>) mQuery.filter(mUserList, newText);
-        for (User user : users) {
-            Log.d(TAG, user.getName() + user.getPhone() + newText);
+        if (users != null) {
+            for (User user : users) {
+                Log.d(TAG, user.getName() + user.getPhone() + newText);
+            }
+            mAdapter.animateTo(users);
         }
-        mAdapter.animateTo(users);
     }
 
     @Override

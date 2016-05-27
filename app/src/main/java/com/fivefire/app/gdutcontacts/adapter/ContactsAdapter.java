@@ -79,7 +79,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
     }
 
     public void animateTo(List<User> data) {
-        if (data != null) {
+        if (data != null && mData != null) {
             applyAndAnimateRemovals(data);
             applyAndAnimateAdditions(data);
             applyAndAnimateMovedItems(data);
