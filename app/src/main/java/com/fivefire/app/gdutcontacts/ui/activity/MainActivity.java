@@ -152,12 +152,17 @@ public class MainActivity extends BaseActivity implements OnQueryTextListener {
                 return onOptionsItemSelected(item);
             }
         });
-        getData();
         mNavigationView.getHeaderView(0).findViewById(R.id.iv).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(MainActivity.this,ChangeMeassageActivity.class);
-                startActivity(intent);
+                if(mLoginUser!=null){    //只有已登录用户才能使用编辑个人资料的功能
+                    Intent intent=new Intent(MainActivity.this,ChangeMeassageActivity.class);
+                    startActivityForResult(intent,1);
+                }
+                else {
+                    showToast("请先登录");
+                }
+
             }
         });
         loadData();
@@ -263,8 +268,13 @@ public class MainActivity extends BaseActivity implements OnQueryTextListener {
         Log.d(TAG, "onOpinionSelected");
         switch (item.getItemId()){
             case R.id.nav_change_password:
-                intent=new Intent(this,ChangePasswordActivity.class);
-                startActivity(intent);
+                if(mLoginUser!=null){   //只有已登录用户才能使用修改密码的功能
+                    intent=new Intent(this,ChangePasswordActivity.class);
+                    startActivity(intent);
+                }
+                else {
+                    showToast("请先登录");
+                }
                 break;
             case R.id.nav_verify:
                 intent = new Intent(this, VerifyActivity.class);
@@ -316,4 +326,17 @@ public class MainActivity extends BaseActivity implements OnQueryTextListener {
         return mQuery;
     }
 
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode){
+            case 1:
+                mLoginUser.setPhone(data.getStringExtra("phone"));
+                mLoginUser.setName(data.getStringExtra("name"));
+                setupNavigationViewHeader();
+                break;
+            default:
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 }

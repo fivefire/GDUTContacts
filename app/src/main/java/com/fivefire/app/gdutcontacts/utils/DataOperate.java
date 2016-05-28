@@ -50,7 +50,6 @@ public class DataOperate {
         user.update(context, objectid, new UpdateListener() {
             @Override
             public void onSuccess() {
-                Toast.makeText(context,"update user data successfully!",Toast.LENGTH_SHORT ).show();
                 Message message=new Message();
                 message.what=1;
                 handler.sendMessage(message);
@@ -58,7 +57,6 @@ public class DataOperate {
 
             @Override
             public void onFailure(int i, String s) {
-                Toast.makeText(context,"code"+i+"message"+s,Toast.LENGTH_SHORT ).show();
                 Message message=new Message();
                 message.what=2;
                 handler.sendMessage(message);

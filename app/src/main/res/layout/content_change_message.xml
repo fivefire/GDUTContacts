@@ -12,252 +12,292 @@
 
   <RelativeLayout
       android:layout_width="wrap_content"
-      android:layout_height="wrap_content">
+      android:layout_height="wrap_content"
+      android:layout_marginTop="5dp"
+      android:layout_marginBottom="5dp"
+      >
       <TextView
           android:layout_alignParentStart="true"
           android:layout_alignParentLeft="true"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
+          android:layout_marginStart="10dp"
           android:layout_marginLeft="10dp"
-          android:layout_marginRight="10dp"
-          android:layout_marginTop="10dp"
           android:text="@string/name"
-          android:textSize="24sp" />
+          android:textSize="16sp"
+          android:id="@+id/text_name" />
       <com.fivefire.app.gdutcontacts.ui.common.ClearEditText
+          android:id="@+id/edit_Name"
+          android:layout_width="230dp"
+          android:layout_height="wrap_content"
+          android:paddingLeft="8dp"
+          android:paddingTop="4dp"
+          android:paddingBottom="4dp"
+          android:textSize="16sp"
+          android:background="@drawable/bg_edittext"
+          android:drawableRight="@drawable/delete_select"
+          android:paddingEnd="0dp"
+          android:paddingRight="0dp"
+          android:layout_marginEnd="8dp"
+          android:paddingStart="8dp"
+          android:inputType="text"
           android:layout_alignParentRight="true"
           android:layout_alignParentEnd="true"
-          android:id="@+id/edit_Name"
-          android:layout_width="200dp"
-          android:layout_height="wrap_content"
-          android:layout_gravity="center"
-          android:layout_marginLeft="10dp"
-          android:layout_marginRight="10dp"
-          android:layout_marginTop="10dp"
-          android:background="@drawable/bg_edittext"
-          android:drawablePadding="10dp"
-          android:drawableRight="@drawable/delete_select"
-          android:inputType="text"
-          android:textSize="24sp" />
+          android:layout_marginRight="8dp"
+
+          />
+
+
 
   </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        >
         <TextView
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
             android:text="@string/Sno"
-            android:textSize="24sp" />
+            android:textSize="16sp"
+            android:id="@+id/text_sno"/>
         <com.fivefire.app.gdutcontacts.ui.common.ClearEditText
+            android:paddingEnd="0dp"
+            android:paddingRight="0dp"
+            android:layout_marginEnd="8dp"
+            android:paddingStart="8dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:id="@+id/edit_Sno"
-            android:layout_width="200dp"
+            android:layout_width="230dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
+            android:paddingLeft="8dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:textSize="16sp"
             android:background="@drawable/bg_edittext"
-            android:drawablePadding="10dp"
             android:drawableRight="@drawable/delete_select"
             android:inputType="text"
-            android:textSize="24sp" />
+            android:layout_marginRight="8dp"
+            />
 
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp">
         <TextView
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
             android:text="@string/edit_grade"
-            android:textSize="24sp" />
-        <com.fivefire.app.gdutcontacts.ui.common.ClearEditText
+            android:textSize="16sp" />
+        <Spinner
+            android:id="@+id/grade_spinner"
+            android:layout_width="230dp"
+            android:layout_height="32dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="10dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:id="@+id/edit_Grade"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
             android:background="@drawable/bg_edittext"
-            android:drawablePadding="10dp"
-            android:drawableRight="@drawable/delete_select"
-            android:inputType="text"
-            android:textSize="24sp" />
+            />
 
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp">
         <TextView
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
             android:text="@string/acadeny"
-            android:textSize="24sp" />
-        <com.fivefire.app.gdutcontacts.ui.common.ClearEditText
+            android:textSize="16sp" />
+        <Spinner
+            android:id="@+id/academy_spinner"
+            android:layout_width="230dp"
+            android:layout_height="32dp"
+            android:entries="@array/Academy"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="10dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:id="@+id/edit_Acadeny"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
             android:background="@drawable/bg_edittext"
-            android:drawablePadding="10dp"
-            android:drawableRight="@drawable/delete_select"
-            android:inputType="text"
-            android:textSize="24sp" />
+            />
 
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        >
         <TextView
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
             android:text="@string/Dno"
-            android:textSize="24sp" />
+            android:textSize="16sp" />
         <com.fivefire.app.gdutcontacts.ui.common.ClearEditText
+            android:paddingEnd="0dp"
+            android:paddingRight="0dp"
+            android:layout_marginEnd="8dp"
+            android:paddingStart="8dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:id="@+id/edit_Dno"
-            android:layout_width="200dp"
+            android:layout_width="230dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
+            android:paddingLeft="8dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:textSize="16sp"
             android:background="@drawable/bg_edittext"
-            android:drawablePadding="10dp"
             android:drawableRight="@drawable/delete_select"
             android:inputType="text"
-            android:textSize="24sp" />
+            android:layout_marginRight="8dp"
+            />
 
     </RelativeLayout>
-
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        >
         <TextView
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
             android:text="@string/Phone"
-            android:textSize="24sp" />
+            android:textSize="16sp" />
         <com.fivefire.app.gdutcontacts.ui.common.ClearEditText
+            android:paddingEnd="0dp"
+            android:paddingRight="0dp"
+            android:layout_marginEnd="8dp"
+            android:paddingStart="8dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:id="@+id/edit_Phone"
-            android:layout_width="200dp"
+            android:layout_width="230dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
+            android:paddingLeft="8dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:textSize="16sp"
             android:background="@drawable/bg_edittext"
-            android:drawablePadding="10dp"
             android:drawableRight="@drawable/delete_select"
             android:inputType="text"
-            android:textSize="24sp" />
+            android:layout_marginRight="8dp"
+            />
 
     </RelativeLayout>
-
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp">
         <TextView
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
             android:text="@string/Sphone"
-            android:textSize="24sp"
+            android:textSize="16sp"
             />
         <com.fivefire.app.gdutcontacts.ui.common.ClearEditText
+            android:paddingEnd="0dp"
+            android:paddingRight="0dp"
+            android:layout_marginEnd="8dp"
+            android:paddingStart="8dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:id="@+id/edit_Sphone"
-            android:layout_width="200dp"
+            android:layout_width="230dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="8dp"
+            android:paddingLeft="8dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:textSize="16sp"
             android:background="@drawable/bg_edittext"
-            android:drawablePadding="10dp"
             android:drawableRight="@drawable/delete_select"
             android:inputType="text"
-            android:textSize="24sp" />
+            />
 
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp">
         <TextView
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
             android:text="@string/Note"
-            android:textSize="24sp"
+            android:textSize="16sp"
             />
         <com.fivefire.app.gdutcontacts.ui.common.ClearEditText
+            android:paddingEnd="0dp"
+            android:paddingRight="0dp"
+            android:layout_marginEnd="8dp"
+            android:paddingStart="8dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:id="@+id/edit_Note"
-            android:layout_width="200dp"
+            android:layout_width="230dp"
             android:layout_height="150dp"
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginRight="8dp"
             android:gravity="start|top"
             android:background="@drawable/bg_edittext"
-            android:drawablePadding="10dp"
             android:drawableRight="@drawable/delete_select"
             android:inputType="textMultiLine"
-            android:textSize="24sp" />
+            android:textSize="16sp"
+            android:paddingLeft="8dp"
+            android:paddingTop="8dp"
+            />
 
     </RelativeLayout>
 
@@ -267,6 +307,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"

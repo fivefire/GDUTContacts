@@ -76,18 +76,22 @@ public class ChangePasswordActivity extends BaseActivity {
                     showToast("当前网络不可用");
                     tag = 0;
                 }
-                Log.d("test",UserMessage.getUserPass(ChangePasswordActivity.this));
                 boolean flag=old_password.equals(UserMessage.getUserPass(ChangePasswordActivity.this));
                 if(tag==1&&!flag){
                         showToast("旧密码错误");
                         tag = 0;
                 }
-                else if(tag==1&&flag){
+                if(new_password.equals(UserMessage.getUserPass(ChangePasswordActivity.this))){
+                    if(tag==1){
+                        Toast.makeText(ChangePasswordActivity.this,"您输入的新密码和旧密码相同，请重输",Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else if(tag==1){
 
                     DataOperate dataOperate = new DataOperate();
                     User user=new User();
                     user.setPassword(new_password);
-                    dataOperate.update(ChangePasswordActivity.this,user,UserMessage.getObject(ChangePasswordActivity.this),handler);
+                    dataOperate.update(ChangePasswordActivity.this,user,UserMessage.getObject(ChangePasswordActivity.this)+"",handler);
                 }
 
             }

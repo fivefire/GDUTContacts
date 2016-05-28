@@ -20,67 +20,67 @@ public class UserMessage{
         editor.putString("pass",user.getPassword());
         editor.putString("phone",user.getPhone());
        editor.putString("id",user.getObjectId());
-       /*  editor.putString("name",user.getName());
+         editor.putString("name",user.getName());
         editor.putString("sno",user.getSno());
-        editor.putInt("grade",(Integer) user.getGrade());
+        if(user.getGrade()==null){
+            editor.putInt("grade",0);
+        }else{
+            editor.putInt("grade",(user.getGrade()).intValue());
+        }
         editor.putString("academy",user.getAname());
         editor.putString("dno",user.getDno());
         editor.putString("sphone",user.getSphone());
-        editor.putString("note",user.getNote());*/
+        editor.putString("note",user.getNote());
+        editor.putInt("tag",(user.getTag()).intValue());
         editor.commit();
     }
 
     public static String getUserPhone(Context context){
         SharedPreferences pref=context.getSharedPreferences("data",Context.MODE_PRIVATE);
-        String pho=pref.getString("phone","");
-        return pho;
+        return pref.getString("phone","");
     }
 
     public static String getUserName(Context context){
         SharedPreferences pref=context.getSharedPreferences("data",Context.MODE_PRIVATE);
-        String pho=pref.getString("name","");
-        return pho;
+        return pref.getString("name","");
     }
     public static String getUserSno(Context context){
         SharedPreferences pref=context.getSharedPreferences("data",Context.MODE_PRIVATE);
-        String pho=pref.getString("sno","");
-        return pho;
+        return pref.getString("sno","");
     }
     public static String getUserGrade(Context context){
         SharedPreferences pref=context.getSharedPreferences("data",Context.MODE_PRIVATE);
-        String pho=pref.getString("grade","");
-        return pho;
+        return pref.getInt("grade",0)+"";
     }
     public static String getUserAcademy(Context context){
         SharedPreferences pref=context.getSharedPreferences("data",Context.MODE_PRIVATE);
-        String pho=pref.getString("academy","");
-        return pho;
+        return pref.getString("academy","");
     }
     public static String getUserDno(Context context){
         SharedPreferences pref=context.getSharedPreferences("data",Context.MODE_PRIVATE);
-        String pho=pref.getString("dno","");
-        return pho;
+        return pref.getString("dno","");
     }
     public static String getUserSphone(Context context){
         SharedPreferences pref=context.getSharedPreferences("data",Context.MODE_PRIVATE);
-        String pho=pref.getString("sphone","");
-        return pho;
+        return pref.getString("sphone","");
     }
     public static String getUserNote(Context context){
         SharedPreferences pref=context.getSharedPreferences("data",Context.MODE_PRIVATE);
-        String pho=pref.getString("note","");
-        return pho;
+        return pref.getString("note","");
     }
     public static String getUserPass(Context context){
         SharedPreferences pref=context.getSharedPreferences("data",Context.MODE_PRIVATE);
-        String pho=pref.getString("pass","");
-        return pho;
+        return pref.getString("pass","");
     }
     public static String getObject(Context context){
         SharedPreferences pref=context.getSharedPreferences("data",Context.MODE_PRIVATE);
-        String pho=pref.getString("id","");
-        Log.d("Tag", pho);
-        return pho;
+        return pref.getString("id","");
     }
+
+    public static String getTag(Context context){
+        SharedPreferences pref=context.getSharedPreferences("data",Context.MODE_PRIVATE);
+        return pref.getInt("tag",0)+"";
+    }
+
 
 }

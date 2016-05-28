@@ -53,9 +53,9 @@
     <string name="see_more">详情</string>
     <string name="ensure">确定</string>
     <string name="title_activity_change_password">ChangePasswordActivity</string>
-    <string name="old_password">旧密码</string>
-    <string name="new_password">新密码</string>
-    <string name="confirm_password">确认密码</string>
+    <string name="old_password">请输入旧密码</string>
+    <string name="new_password">请输入新密码</string>
+    <string name="confirm_password">请再次确认新密码</string>
     <string name="confirm">确认</string>
     <string name="title_activity_change_meassage">ChangeMeassageActivity</string>
     <string name="Sno">学号:</string>
