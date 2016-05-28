@@ -66,6 +66,7 @@ public class LoginActivity extends Activity {
                     User user = (User) msg.obj;
                     if(user.getPassword().equals(password)&&user.getTag().intValue()!=3) {
                         Intent intent = new Intent();
+                        intent.putExtra("user", user);//应该考虑把key正确存放
                         intent.setClass(LoginActivity.this,MainActivity.class);
                         startActivity(intent);
                     }else{

@@ -19,6 +19,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fivefire.app.gdutcontacts.R;
 import com.fivefire.app.gdutcontacts.adapter.ContactsAdapter;
@@ -38,6 +40,8 @@ import cn.bmob.v3.Bmob;
 
 public class MainActivity extends BaseActivity implements OnQueryTextListener {
     private static final String TAG = "MainActivity";
+    private static final int TYPE_ADMIN = 1;
+
     private Toolbar mToolbar;
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
@@ -50,6 +54,10 @@ public class MainActivity extends BaseActivity implements OnQueryTextListener {
     List<User> list = new ArrayList<>();
     private FloatingActionButton mShowButton;
     private SQLiteDatabase db;
+
+    private User mLoginUser;//当前登录的用户
+
+    private static boolean isAdmin = false;
 
     final String sql="CREATE TABLE "+"UserMassage"+" (" +
             "Phone  varchar(11) NOT NULL ," +
@@ -90,8 +98,19 @@ public class MainActivity extends BaseActivity implements OnQueryTextListener {
         insertDatabase();
     }
 
+
     @Override
     protected void setupView(Bundle savedInstanceState) {
+        //先检查Intent
+        Intent intent = getIntent();
+        mLoginUser = (User) intent.getSerializableExtra("user");
+        if (mLoginUser == null) {
+            Toast.makeText(this, "非正常启动，请重新登录！", Toast.LENGTH_SHORT).show();
+//            finish();
+        } else {
+            isAdmin = mLoginUser.getTag().intValue() == TYPE_ADMIN;
+        }
+
         mDrawerLayout.addDrawerListener(mDrawerToggle);
 
         if (mToolbar != null) {
@@ -133,11 +152,21 @@ public class MainActivity extends BaseActivity implements OnQueryTextListener {
                 return onOptionsItemSelected(item);
             }
         });
-        getData();
+        loadData();
+        setupNavigationViewHeader();
         insertDatabase();
     }
 
-    private void getData() {
+    private void setupNavigationViewHeader() {
+        if (mLoginUser != null) {
+            TextView name = (TextView) mNavigationView.getHeaderView(0).findViewById(R.id.tv_name);
+            name.setText(mLoginUser.getName());
+            TextView phone = (TextView) mNavigationView.getHeaderView(0).findViewById(R.id.tv_phone);
+            phone.setText(mLoginUser.getPhone());
+        }
+    }
+
+    private void loadData() {
         DataOperate operate = new DataOperate();
         operate.getAllUsers(this, handler);
     }
@@ -211,6 +240,7 @@ public class MainActivity extends BaseActivity implements OnQueryTextListener {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        mNavigationView.getMenu().findItem(R.id.nav_verify).setVisible(isAdmin);
         return true;
     }
 
