@@ -11,6 +11,8 @@ public final class PinyinUtils {
         for (int i = 0; i < s.length(); i++) {
             if (Pinyin.isChinese(s.charAt(i))) {
                 pinyin[i] = Pinyin.toPinyin(s.charAt(i));
+            } else {
+                pinyin[i] = String.valueOf(s.charAt(i));
             }
         }
         return pinyin;
