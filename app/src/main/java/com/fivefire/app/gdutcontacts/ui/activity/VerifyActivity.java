@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.fivefire.app.gdutcontacts.R;
@@ -84,6 +85,15 @@ public class VerifyActivity extends BaseActivity implements SwipeRefreshLayout.O
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setTitle(R.string.verify);
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
