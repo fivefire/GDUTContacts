@@ -1,6 +1,8 @@
 package com.fivefire.app.gdutcontacts.ui.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -70,7 +72,10 @@ public class MainActivity extends BaseActivity implements OnQueryTextListener {
             "Note  varchar(50) NULL ," +
             "PRIMARY KEY (`Phone`)" +
             ")";
-
+    public static final String FirstFile = "CheckFirst";
+    public static final String FIRST_RUN = "first";
+    private boolean first;
+    SharedPreferences settings;
     @SuppressWarnings("unchecked")
     private Handler handler = new Handler(Looper.getMainLooper()){
         @Override
@@ -95,7 +100,7 @@ public class MainActivity extends BaseActivity implements OnQueryTextListener {
         mRecyclerView = (RecyclerView) findViewById(R.id.rv);
         mNineKeyDialpad = (NineKeyDialpad) findViewById(R.id.nine_key_dialpad);
         mShowButton = (FloatingActionButton) findViewById(R.id.bt_show);
-        insertDatabase();
+
     }
 
 
@@ -166,10 +171,11 @@ public class MainActivity extends BaseActivity implements OnQueryTextListener {
             }
         });
         loadData();
-
         setupNavigationViewHeader();
 
-        insertDatabase();
+        settings = getSharedPreferences(FirstFile, Context.MODE_PRIVATE);
+        first = settings.getBoolean(FIRST_RUN,true);
+        insertDatabase(first);
     }
 
     private void setupNavigationViewHeader() {
@@ -186,38 +192,41 @@ public class MainActivity extends BaseActivity implements OnQueryTextListener {
         operate.getAllUsers(this, handler);
     }
 
-    private void insertDatabase()
+    private void insertDatabase(final boolean IFfirst)
     {
-        /*final String path=this.getFilesDir().getPath();
-        final String filename="User.db";
-        sqLiteUtils = new SQLiteUtils(MainActivity.this);
-        File dir = new File(path);
-        if (!dir.exists())
-        {
-            if (!dir.mkdir())
-            {
-                showToast("路径创建失败");
-            }
-
-        }
-        db = SQLiteDatabase.openOrCreateDatabase(path+"/"+filename,null);
-
-        db.execSQL(sql);*/
+        final SharedPreferences.Editor editor = settings.edit();
         db= this.openOrCreateDatabase("User.db",MODE_PRIVATE,null);
         try
         {
-            db.execSQL(sql);
+            Log.e("first",IFfirst+"");
+            if (IFfirst)
+                db.execSQL(sql);
             Handler handler = new Handler(Looper.getMainLooper()){
                 @Override
                 public void handleMessage(Message msg) {
                     if (msg.what==1){
                         list=(List<User>) msg.obj;
                         Log.e("size",list.size()+"");
-                        for (int i=0;i<list.size();i++)
+                        if (IFfirst)
                         {
-                            DBUtils.insertAll(db,list.get(i));
+                            editor.putBoolean(FIRST_RUN,false);
+                            editor.commit();
+                            for (int i=0;i<list.size();i++)
+                            {
+                                DBUtils.insertAll(db,list.get(i));
+                            }
+
+                            Log.e("massage","插入完成");
                         }
-                        Log.e("massage","插入完成");
+                        else
+                        {
+                            for (int i=0;i<list.size();i++)
+                            {
+                                DBUtils.UpdateAll(db,list.get(i));
+                            }
+                            Log.e("massage","更新完成");
+                        }
+
                     }
                 }
             };

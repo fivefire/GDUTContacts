@@ -61,29 +61,28 @@ public class DBUtils {
     public static ArrayList<User> SearchUserByANameOrGrade(String key,String massage,SQLiteDatabase db)
     {
         ArrayList<User> list = new ArrayList<>();
-        Cursor cursor;
+        Cursor SearchUser;
         if (massage.equals("AName"))
         {
-            cursor = db.rawQuery("select * from UserMassage where AName like ?",new String[]{key});
+            SearchUser = db.rawQuery("select * from UserMassage where AName like ?",new String[]{key});
         }
         else
         {
-            cursor = db.rawQuery("select * from UserMassage where Grade like ?",new String[]{key});
+            SearchUser = db.rawQuery("select * from UserMassage where Grade like ?",new String[]{key});
         }
-        while (cursor.moveToNext())
+        while (SearchUser.moveToNext())
         {
-            User item = new User();
-            item.setPhone(cursor.getString(0));
-            item.setSphone(cursor.getString(1));
-            item.setName(cursor.getString(2));
-            item.setSno(cursor.getString(3));
-            item.setGrade(cursor.getInt(4));
-            item.setPassword(cursor.getString(5));
-            item.setDno(cursor.getString(6));
-            item.setAname(cursor.getString(8));
-            list.add(item);
+            User user = new User();
+            user.setPhone(SearchUser.getString(0));
+            user.setSphone(SearchUser.getString(1));
+            user.setName(SearchUser.getString(2));
+            user.setSno(SearchUser.getString(3));
+            user.setGrade(SearchUser.getInt(4));
+            user.setDno(SearchUser.getString(5));
+            user.setAname(SearchUser.getString(6));
+            list.add(user);
         }
-        cursor.close();
+        SearchUser.close();
         return list;
     }
     public static void insertAll(SQLiteDatabase db,User user)
@@ -91,5 +90,15 @@ public class DBUtils {
         String sql = "insert into "+ "UserMassage" + "(Phone,Sphone,Name,Sno,Grade,Dno,AName,Note) values(?,?,?,?,?,?,?,?)";
         db.execSQL(sql,new String[]{user.getPhone(),user.getSphone(),user.getName(),user.getSno(),user.getGrade()+"",user.getDno(),user.getAname(),user.getNote()});
         //db.close();
+    }
+    public static void UpdateAll(SQLiteDatabase db,User user)
+    {
+        User instant;
+        instant = SearchUserByKey(user.getName(),db);
+        if (instant==null)
+        {
+            String sql = "insert into "+ "UserMassage" + "(Phone,Sphone,Name,Sno,Grade,Dno,AName,Note) values(?,?,?,?,?,?,?,?)";
+            db.execSQL(sql,new String[]{user.getPhone(),user.getSphone(),user.getName(),user.getSno(),user.getGrade()+"",user.getDno(),user.getAname(),user.getNote()});
+        }
     }
 }

@@ -37,7 +37,10 @@
         <activity
             android:name=".ui.activity.LoginActivity"
             android:label="@string/title_activity_login"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme">
+
+
+        </activity>
         <activity android:name=".ui.activity.FgPasswordActivity" />
         <activity
             android:name=".ui.activity.RegisterActivity"
