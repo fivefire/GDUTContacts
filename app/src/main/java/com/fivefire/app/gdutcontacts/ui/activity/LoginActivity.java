@@ -108,7 +108,7 @@ public class LoginActivity extends Activity {
                                             Message message = new Message();
                                             message.what = 1;
                                             message.obj = list.get(0);
-                                            LoginActivity.this.handler.sendMessageDelayed(message,1300);
+                                            LoginActivity.this.handler.sendMessageDelayed(message,500);
                                         }else if(list.isEmpty()){
                                             Toast.makeText(LoginActivity.this,"账号不正确",Toast.LENGTH_SHORT).show();
                                         }else{

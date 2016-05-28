@@ -2,6 +2,7 @@ package com.fivefire.app.gdutcontacts.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,7 @@ import cn.bmob.v3.listener.UpdateListener;
 public class VerifyAdapter extends RecyclerView.Adapter<VerifyAdapter.VerifyViewHolder> {
     private static final int FEMALE = 1;
     private static final int MALE = 0;
+    private static final String TAG = "VerifyAdapter";
 
 
     private Context mContext;
@@ -51,17 +53,20 @@ public class VerifyAdapter extends RecyclerView.Adapter<VerifyAdapter.VerifyView
         holder.sno.setText(user.getSno());
         holder.phone.setText(user.getPhone());
         holder.aName.setText(user.getAname());
+        Log.d(TAG, "user sex = " + getSexBySno(user.getSno()));
         holder.sex.setImageLevel(getSexBySno(user.getSno()));
 
         holder.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void onItemClick(View view, int position) {
+            public void onItemClick(View view, final int position) {
                 User user = mData.get(position);
                 user.setTag(2);
                 user.update(mContext, user.getObjectId(), new UpdateListener() {
                     @Override
                     public void onSuccess() {
                         Toast.makeText(mContext, "update successfully!", Toast.LENGTH_SHORT).show();
+                        mData.remove(position);
+                        notifyItemRemoved(position);
                     }
 
                     @Override
@@ -75,6 +80,7 @@ public class VerifyAdapter extends RecyclerView.Adapter<VerifyAdapter.VerifyView
 
     private int getSexBySno(String sno) {
         if (sno != null && !sno.isEmpty()) {
+            Log.d(TAG, sno);
             if (sno.length() >= 2 && sno.charAt(1) == '2') {
                 return FEMALE;
             }
