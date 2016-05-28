@@ -7,6 +7,7 @@
             android:title="@string/change_password"/>
         <item
             android:id="@+id/nav_verify"
+            android:visible="false"
             android:icon="@drawable/ic_gavel_black_24dp"
             android:title="@string/verify"/>
         <item

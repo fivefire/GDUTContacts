@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -18,7 +19,10 @@ import com.fivefire.app.gdutcontacts.adapter.AutoTextAdapter;
 import com.fivefire.app.gdutcontacts.model.User;
 import com.fivefire.app.gdutcontacts.ui.common.BaseActivity;
 import com.fivefire.app.gdutcontacts.utils.DBUtils;
+import com.fivefire.app.gdutcontacts.utils.DataOperate;
 
+
+import java.util.List;
 
 import cn.bmob.v3.Bmob;
 
@@ -31,7 +35,8 @@ public class SearchActivity extends BaseActivity {
     String[] allName;
     AutoTextAdapter autoTextAdapter;
     User user;
-
+    List<User> userList;
+    DataOperate dataOperate;
     @Override
     protected void setupView(Bundle savedInstanceState) {
 
@@ -40,13 +45,13 @@ public class SearchActivity extends BaseActivity {
             setTitle(getString(R.string.app_name));
         }
 
-        String path = this.getFilesDir().getPath();
-        String filename = "temp.db";
+        /*String path = this.getFilesDir().getPath();
+        String filename = "User.db";*/
 
-        db = SQLiteDatabase.openOrCreateDatabase(path + "/" + filename, null);
+        db = this.openOrCreateDatabase("User.db",MODE_PRIVATE,null);
         Cursor cursor = db.rawQuery("select * from UserMassage where name like ?", new String[]{"%" + "" + "%"});
         allName = DBUtils.getAllName(cursor);
-
+        dataOperate = new DataOperate();
         autoTextAdapter = new AutoTextAdapter(allName, SearchActivity.this);
         SearchKey.setAdapter(autoTextAdapter);
 
@@ -70,6 +75,7 @@ public class SearchActivity extends BaseActivity {
         SearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.e("Searchkey",SearchKey.getText().toString());
                 user=DBUtils.SearchUserByKey(SearchKey.getText().toString(),db);
                 if (user==null)
                 {
@@ -113,6 +119,7 @@ public class SearchActivity extends BaseActivity {
         SearchButton = (Button) findViewById(R.id.SearchButton);
         ANameSearch = (Button) findViewById(R.id.AnameSearch);
         GradeSearch = (Button) findViewById(R.id.GradeSearch);
+
     }
 
     @Override

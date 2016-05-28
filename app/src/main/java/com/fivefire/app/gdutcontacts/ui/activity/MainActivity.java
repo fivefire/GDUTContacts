@@ -2,8 +2,10 @@ package com.fivefire.app.gdutcontacts.ui.activity;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.os.PersistableBundle;
 import android.support.design.widget.FloatingActionButton;
@@ -17,21 +19,20 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fivefire.app.gdutcontacts.R;
 import com.fivefire.app.gdutcontacts.adapter.ContactsAdapter;
 import com.fivefire.app.gdutcontacts.model.User;
 import com.fivefire.app.gdutcontacts.ui.common.BaseActivity;
+import com.fivefire.app.gdutcontacts.utils.DBUtils;
 import com.fivefire.app.gdutcontacts.utils.DataOperate;
 import com.fivefire.app.gdutcontacts.widget.dialpad.NineKeyDialpad;
 import com.fivefire.app.gdutcontacts.widget.dialpad.OnQueryTextListener;
 import com.fivefire.app.gdutcontacts.widget.dialpad.animation.OnAnimationListenerAdapter;
 import com.fivefire.app.gdutcontacts.widget.dialpad.query.IQuery;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +40,8 @@ import cn.bmob.v3.Bmob;
 
 public class MainActivity extends BaseActivity implements OnQueryTextListener {
     private static final String TAG = "MainActivity";
+    private static final int TYPE_ADMIN = 1;
+
     private Toolbar mToolbar;
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
@@ -48,10 +51,28 @@ public class MainActivity extends BaseActivity implements OnQueryTextListener {
     private IQuery mQuery;//查询器
     private List<User> mUserList;
     private ContactsAdapter mAdapter;//Rv的Adapter
-
+    List<User> list = new ArrayList<>();
     private FloatingActionButton mShowButton;
+    private SQLiteDatabase db;
 
-    private Handler handler = new Handler(){
+    private User mLoginUser;//当前登录的用户
+
+    private static boolean isAdmin = false;
+
+    final String sql="CREATE TABLE "+"UserMassage"+" (" +
+            "Phone  varchar(11) NOT NULL ," +
+            "Sphone  varchar(11) NULL ," +
+            "Name  varchar(20) NOT NULL ," +
+            "Sno  varchar(10) NULL ," +
+            "Grade  int NULL ," +
+            "Dno  varchar(10) NULL ," +
+            "AName  varchar(10) NULL ," +
+            "Note  varchar(50) NULL ," +
+            "PRIMARY KEY (`Phone`)" +
+            ")";
+
+    @SuppressWarnings("unchecked")
+    private Handler handler = new Handler(Looper.getMainLooper()){
         @Override
         public void handleMessage(Message msg) {
             if (msg.what == 1) {
@@ -77,8 +98,19 @@ public class MainActivity extends BaseActivity implements OnQueryTextListener {
         insertDatabase();
     }
 
+
     @Override
     protected void setupView(Bundle savedInstanceState) {
+        //先检查Intent
+        Intent intent = getIntent();
+        mLoginUser = (User) intent.getSerializableExtra("user");
+        if (mLoginUser == null) {
+            Toast.makeText(this, "非正常启动，请重新登录！", Toast.LENGTH_SHORT).show();
+//            finish();
+        } else {
+            isAdmin = mLoginUser.getTag().intValue() == TYPE_ADMIN;
+        }
+
         mDrawerLayout.addDrawerListener(mDrawerToggle);
 
         if (mToolbar != null) {
@@ -90,6 +122,7 @@ public class MainActivity extends BaseActivity implements OnQueryTextListener {
             mDrawerToggle.syncState();
         }
         mAdapter = new ContactsAdapter(this, mNineKeyDialpad);
+
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
@@ -127,17 +160,30 @@ public class MainActivity extends BaseActivity implements OnQueryTextListener {
                 startActivity(intent);
             }
         });
+        loadData();
+        setupNavigationViewHeader();
+        insertDatabase();
     }
 
-    private void getData() {
+    private void setupNavigationViewHeader() {
+        if (mLoginUser != null) {
+            TextView name = (TextView) mNavigationView.getHeaderView(0).findViewById(R.id.tv_name);
+            name.setText(mLoginUser.getName());
+            TextView phone = (TextView) mNavigationView.getHeaderView(0).findViewById(R.id.tv_phone);
+            phone.setText(mLoginUser.getPhone());
+        }
+    }
+
+    private void loadData() {
         DataOperate operate = new DataOperate();
-        operate.queryAllVerified(this, handler);
+        operate.getAllUsers(this, handler);
     }
 
     private void insertDatabase()
     {
-        final String path=this.getFilesDir().getPath();
-        final String filename="temp.db";
+        /*final String path=this.getFilesDir().getPath();
+        final String filename="User.db";
+        sqLiteUtils = new SQLiteUtils(MainActivity.this);
         File dir = new File(path);
         if (!dir.exists())
         {
@@ -145,18 +191,42 @@ public class MainActivity extends BaseActivity implements OnQueryTextListener {
             {
                 showToast("路径创建失败");
             }
+
         }
-        File file = new File(path+"/"+filename);
+        db = SQLiteDatabase.openOrCreateDatabase(path+"/"+filename,null);
+
+        db.execSQL(sql);*/
+        db= this.openOrCreateDatabase("User.db",MODE_PRIVATE,null);
         try
         {
-            InputStream inputStream = this.getApplication().getResources().openRawResource(R.raw.temp);
+            db.execSQL(sql);
+            Handler handler = new Handler(Looper.getMainLooper()){
+                @Override
+                public void handleMessage(Message msg) {
+                    if (msg.what==1){
+                        list=(List<User>) msg.obj;
+                        Log.e("size",list.size()+"");
+                        for (int i=0;i<list.size();i++)
+                        {
+                            DBUtils.insertAll(db,list.get(i));
+                        }
+                        Log.e("massage","插入完成");
+                    }
+                }
+            };
+            DataOperate dataOperate = new DataOperate();
+            dataOperate.getAllUsers(this,handler);
+
+
+            /*InputStream inputStream = this.getApplication().getResources().openRawResource(R.raw.temp);
             FileOutputStream fos = new FileOutputStream(file);
             byte[] buf = new byte[inputStream.available()];
             inputStream.read(buf);
             fos.write(buf);
             fos.flush();
             fos.close();
-            inputStream.close();
+            inputStream.close();*/
+
 
         }catch (Exception e)
         {
@@ -178,6 +248,7 @@ public class MainActivity extends BaseActivity implements OnQueryTextListener {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        mNavigationView.getMenu().findItem(R.id.nav_verify).setVisible(isAdmin);
         return true;
     }
 
@@ -225,10 +296,12 @@ public class MainActivity extends BaseActivity implements OnQueryTextListener {
     @SuppressWarnings("unchecked")
     public void onQueryTextChange(String newText) {
         List<User> users = (List<User>) mQuery.filter(mUserList, newText);
-        for (User user : users) {
-            Log.d(TAG, user.getName() + user.getPhone() + newText);
+        if (users != null) {
+            for (User user : users) {
+                Log.d(TAG, user.getName() + user.getPhone() + newText);
+            }
+            mAdapter.animateTo(users);
         }
-        mAdapter.animateTo(users);
     }
 
     @Override

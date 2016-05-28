@@ -30,9 +30,8 @@ public class ClassifyAcativity extends BaseActivity {
     @Override
     protected void setupView(Bundle savedInstanceState) {
 
-        String path = this.getFilesDir().getPath();
-        String filename = "temp.db";
-        db = SQLiteDatabase.openOrCreateDatabase(path + "/" + filename, null);
+
+        db = this.openOrCreateDatabase("User.db",MODE_PRIVATE,null);
 
         final Intent intent=getIntent();
         massage = intent.getStringExtra("Message");
@@ -51,11 +50,19 @@ public class ClassifyAcativity extends BaseActivity {
                  */
                 ArrayList<User> list = new ArrayList<User>();
                 list = DBUtils.SearchUserByANameOrGrade(Contenx[position],massage,db);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("data",list);
-                Intent i = new Intent(ClassifyAcativity.this,DoubleMassageActivity.class);
-                i.putExtras(bundle);
-                startActivity(i);
+                if(list.size()==0)
+                {
+                    showToast("不存在数据");
+                }
+                else
+                {
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("data",list);
+                    Intent i = new Intent(ClassifyAcativity.this,DoubleMassageActivity.class);
+                    i.putExtras(bundle);
+                    startActivity(i);
+                }
+
             }
         });
     }

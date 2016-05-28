@@ -2,6 +2,7 @@ package com.fivefire.app.gdutcontacts.utils;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.fivefire.app.gdutcontacts.model.User;
 
@@ -29,16 +30,17 @@ public class DBUtils {
     public static User SearchUserByKey(String key, SQLiteDatabase db)
     {
         User user=null;
-        Cursor SearchUser = db.rawQuery("select * from UserMassage where SPhone like?", new String[]{"%" + key + "%"});
+        Cursor SearchUser = db.rawQuery("select * from UserMassage where SPhone like?", new String[]{ key});
         int count = SearchUser.getCount();
         if (count == 0) {
-            SearchUser = db.rawQuery("select * from UserMassage where Phone like?", new String[]{"%" + key + "%"});
+            SearchUser = db.rawQuery("select * from UserMassage where Phone like?", new String[]{ key});
             count = SearchUser.getCount();
         }
         if (count == 0) {
-            SearchUser = db.rawQuery("select * from UserMassage where Name like?", new String[]{"%" + key + "%"});
+            SearchUser = db.rawQuery("select * from UserMassage where Name like?", new String[]{key});
             count = SearchUser.getCount();
         }
+        Log.e("count",count+"");
         if (count == 0) {
             return null;
         } else if (count == 1) {
@@ -49,9 +51,8 @@ public class DBUtils {
                 user.setName(SearchUser.getString(2));
                 user.setSno(SearchUser.getString(3));
                 user.setGrade(SearchUser.getInt(4));
-                user.setPassword(SearchUser.getString(5));
-                user.setDno(SearchUser.getString(6));
-                user.setAname(SearchUser.getString(8));
+                user.setDno(SearchUser.getString(5));
+                user.setAname(SearchUser.getString(6));
             }
         }
         SearchUser.close();
@@ -85,5 +86,10 @@ public class DBUtils {
         cursor.close();
         return list;
     }
-
+    public static void insertAll(SQLiteDatabase db,User user)
+    {
+        String sql = "insert into "+ "UserMassage" + "(Phone,Sphone,Name,Sno,Grade,Dno,AName,Note) values(?,?,?,?,?,?,?,?)";
+        db.execSQL(sql,new String[]{user.getPhone(),user.getSphone(),user.getName(),user.getSno(),user.getGrade()+"",user.getDno(),user.getAname(),user.getNote()});
+        //db.close();
+    }
 }

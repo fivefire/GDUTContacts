@@ -122,9 +122,11 @@ public class DeletableEditText extends EditText implements View.OnFocusChangeLis
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 if (isClearIconVisible) {
-                    mHandle.postDelayed(mLongPressRunnable, DELAY_TIME);
                     //按下事件，且图标可视，此时应该判断第一次按下的位置是否处图标所在位置
                     isTouch = event.getX() > mIconLeftX && event.getX() < mIconRightX;
+                    if (isTouch) {
+                        mHandle.postDelayed(mLongPressRunnable, DELAY_TIME);
+                    }
                 }
                 break;
             case MotionEvent.ACTION_UP:
