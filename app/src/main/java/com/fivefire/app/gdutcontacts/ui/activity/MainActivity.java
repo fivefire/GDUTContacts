@@ -153,7 +153,9 @@ public class MainActivity extends BaseActivity implements OnQueryTextListener {
             }
         });
         loadData();
+
         setupNavigationViewHeader();
+
         insertDatabase();
     }
 
