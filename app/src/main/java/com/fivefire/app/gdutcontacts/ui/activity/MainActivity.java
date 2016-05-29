@@ -220,10 +220,17 @@ public class MainActivity extends BaseActivity implements OnQueryTextListener {
                         }
                         else
                         {
-                            for (int i=0;i<list.size();i++)
+                            new Thread()
                             {
-                                DBUtils.UpdateAll(db,list.get(i));
-                            }
+                                @Override
+                                public void run() {
+                                    for (int i=0;i<list.size();i++)
+                                    {
+                                        DBUtils.UpdateAll(db,list.get(i));
+                                    }
+                                }
+                            }.run();
+
                             Log.e("massage","更新完成");
                         }
 

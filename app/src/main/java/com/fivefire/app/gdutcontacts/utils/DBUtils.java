@@ -40,7 +40,6 @@ public class DBUtils {
             SearchUser = db.rawQuery("select * from UserMassage where Name like?", new String[]{key});
             count = SearchUser.getCount();
         }
-        Log.e("count",count+"");
         if (count == 0) {
             return null;
         } else if (count == 1) {
@@ -95,6 +94,8 @@ public class DBUtils {
     {
         User instant;
         instant = SearchUserByKey(user.getName(),db);
+        Log.e("User",user.getName());
+        //Log.e("Name",instant.getName());
         if (instant==null)
         {
             String sql = "insert into "+ "UserMassage" + "(Phone,Sphone,Name,Sno,Grade,Dno,AName,Note) values(?,?,?,?,?,?,?,?)";
