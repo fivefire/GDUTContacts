@@ -170,6 +170,7 @@ public class LoginActivity extends Activity {
     @Override
     protected void onStop() {
         Log.d("onStop()","-----------LoginActivity");
+        finish();
         super.onStop();
     }
 

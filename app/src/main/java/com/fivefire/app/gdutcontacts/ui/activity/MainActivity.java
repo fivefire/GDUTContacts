@@ -1,6 +1,7 @@
 package com.fivefire.app.gdutcontacts.ui.activity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -14,10 +15,12 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -175,7 +178,13 @@ public class MainActivity extends BaseActivity implements OnQueryTextListener {
 
         settings = getSharedPreferences(FirstFile, Context.MODE_PRIVATE);
         first = settings.getBoolean(FIRST_RUN,true);
-        insertDatabase(first);
+        if (first) {
+            SharedPreferences.Editor editor=this.getSharedPreferences(FirstFile,Context.MODE_PRIVATE).edit();
+            insertDatabase(first);
+            editor.putBoolean(FIRST_RUN, false);
+            editor.apply();
+        }
+
     }
 
     private void setupNavigationViewHeader() {
@@ -302,8 +311,7 @@ public class MainActivity extends BaseActivity implements OnQueryTextListener {
                 finish();
                 break;
             case R.id.action_logout:
-                intent = new Intent(this, LoginActivity.class);
-                startActivity(intent);
+                finish();
                 break;
             case R.id.action_classified_query:
                 intent = new Intent(this, SearchActivity.class);
@@ -354,5 +362,26 @@ public class MainActivity extends BaseActivity implements OnQueryTextListener {
             default:
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK )
+        {
+            new AlertDialog.Builder(MainActivity.this)
+                    .setTitle("系统提示")
+                    .setMessage("确定要退出吗？")
+                    .setNegativeButton("取消", null)
+                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            finish();
+                        }
+                    })
+                    .create()
+                    .show();
+
+        }
+        return false;
     }
 }
