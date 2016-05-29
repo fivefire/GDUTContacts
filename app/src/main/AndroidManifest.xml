@@ -26,19 +26,15 @@
             android:theme="@style/AppTheme" />
         <activity android:name=".ui.activity.UserMassageActivity" />
         <activity android:name=".ui.activity.ClassifyAcativity" />
-        <activity android:name=".ui.activity.DoubleMassageActivity"/>
+        <activity android:name=".ui.activity.DoubleMassageActivity" />
+        <activity android:name=".ui.activity.VerifyActivity" />
         <activity
-            android:name=".ui.activity.VerifyActivity"/>
-        <activity
-            android:name=".ui.activity.LoginActivity"
-            android:label="@string/title_activity_login"
-            android:theme="@style/AppTheme">
+            android:name=".ui.activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity android:name=".ui.activity.FgPasswordActivity" />
         <activity
@@ -51,7 +47,8 @@
         <activity
             android:name=".ui.activity.ChangeMeassageActivity"
             android:label="@string/title_activity_change_meassage"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".ui.activity.AboutActivity"></activity>
     </application>
 
 </manifest>

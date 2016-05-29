@@ -306,6 +306,8 @@ public class MainActivity extends BaseActivity implements OnQueryTextListener {
                 startActivity(intent);
                 break;
             case R.id.nav_about:
+                intent = new Intent(this, AboutActivity.class);
+                startActivity(intent);
                 break;
             case R.id.nav_exit:
                 finish();
